@@ -13,3 +13,4 @@
 
 *.dcp
 *.bit
+vga-fpga-clock.runs/
