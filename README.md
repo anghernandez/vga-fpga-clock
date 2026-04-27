@@ -1,7 +1,9 @@
 # Proyecto 1 — Controlador VGA con Reloj Digital
 
 **Curso:** Taller de Diseño Digital (EL3313) — TEC, I Semestre 2026  
-**Integrantes:** Milagro Rojas Sánchez · Ángel Hernández  
+
+**Integrantes:** Milagro Rojas Sánchez · Angie Hernández Mairena · Brayan Solís Rojas  
+
 **Profesor:** Luis G. León-Vega, Ph.D
 
 ---
@@ -28,22 +30,6 @@ CLK100MHZ → (÷4) → 25 MHz
                       └── debounce × 2 ← BTNU, BTND
 ```
 
----
-
-## Módulos
-
-| Módulo | Autor | Descripción |
-|---|---|---|
-| `vga_controller.v` | Ángel | Controlador VGA jerárquico con pipeline de 2 etapas |
-| `vga_timing.v` | Ángel | Generador de contadores H/V y señales hsync/vsync |
-| `vga_memory_interface.v` | Ángel | Cálculo de dirección VRAM: `y×640 + x` |
-| `vram_dual_port.v` | Ángel | BRAM dual-port 307 200 × 8 bits (RGB332) |
-| `vram_background_writer.v` | Ángel | Renderizado de fondo y dígitos del reloj en VRAM |
-| `clock_controller.v` | Milagro | Timekeeping HH:MM:SS, tick 1 Hz, formato 12h/24h, ajuste por botones |
-| `debounce.v` | Milagro | Sincronizador + contador de estabilidad 20 ms |
-| `top_clock_vga.v` | Milagro | Integración de todos los módulos |
-
----
 
 ## Interfaz de usuario
 
