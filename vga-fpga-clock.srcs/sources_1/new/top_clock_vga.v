@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
-//============================================================
+//==================================
 // TOP: Sistema VGA con VRAM externa
-//============================================================
+//==================================
 
 module top_clock_vga(
     input  wire CLK100MHZ,
@@ -14,23 +14,24 @@ module top_clock_vga(
     output wire [3:0] VGA_B
 );
 
-    //========================================================
-    // 1. División de reloj: 100 MHz -> 25 MHz
-    //========================================================
-    reg [1:0] clk_div = 2'b00;
-
-    always @(posedge CLK100MHZ) begin
-        if (reset)
-            clk_div <= 2'b00;
-        else
-            clk_div <= clk_div + 1'b1;
-    end
-
-    wire clk_25mhz = clk_div[1];
-
-    //========================================================
+    //========================================
+    // 1. 100 MHz -> 25 MHz
+    //========================================
+    wire clk_25mhz;
+    wire clk_locked;
+    
+    clk_wiz_0 clk_inst (
+        .clk_in1(CLK100MHZ),
+        .clk_out1(clk_25mhz),
+        .reset(reset),
+        .locked(clk_locked)
+    );
+    
+    wire system_reset = reset | ~clk_locked;
+    
+    //===============================
     // 2. Señales internas VGA / VRAM
-    //========================================================
+    //===============================
     wire [18:0] vram_addr_read;
     wire [7:0]  vram_data_out;
     wire [7:0]  vga_rgb;
@@ -40,12 +41,12 @@ module top_clock_vga(
     wire [18:0] vram_addr_write;
     wire [7:0]  vram_data_in;
 
-    //========================================================
+    //===================
     // 3. Controlador VGA
-    //========================================================
+    //===================
     vga_controller vga_controller_inst (
         .clk(clk_25mhz),
-        .reset(reset),
+        .reset(system_reset),
         .vram_data(vram_data_out),
 
         .hsync(VGA_HS),
@@ -58,9 +59,9 @@ module top_clock_vga(
         .video_on()
     );
 
-    //========================================================
+    //===================================
     // 4. VRAM externa al controlador VGA
-    //========================================================
+    //===================================
     vram_dual_port #(
         .WIDTH(8),
         .DEPTH(640*480),
@@ -78,13 +79,13 @@ module top_clock_vga(
         .data_in(vram_data_in)
     );
 
-    //========================================================
+    //===================================================
     // 5. Generador temporal de imagen / fondo
     //    Luego aquí conectas tu módulo del reloj digital
-    //========================================================
+    //===================================================
     vram_background_writer background_writer_inst (
         .clk(clk_25mhz),
-        .reset(reset),
+        .reset(system_reset),
 
         .we(vram_we),
         .addr_write(vram_addr_write),
