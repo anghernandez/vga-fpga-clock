@@ -13,3 +13,10 @@
 
 *.dcp
 *.bit
+
+# Carpeta de prueba personal
+test_Mila/
+
+# Archivos de contexto internos
+.claude/
+CLAUDE.md
