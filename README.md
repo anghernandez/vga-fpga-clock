@@ -2,7 +2,7 @@
 
 **Curso:** Taller de Diseño Digital (EL3313) — TEC, I Semestre 2026  
 
-**Integrantes:**Milagro Rojas Sánchez · Angie Hernández Mairena · Brayan Solís Rojas 
+**Integrantes:** Milagro Rojas Sánchez · Angie Hernández Mairena · Brayan Solís Rojas 
 
 **Profesor:** Luis G. León-Vega, Ph.D  
 
