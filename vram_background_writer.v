@@ -197,6 +197,18 @@ module vram_background_writer (
             default: digit_of_slot = 4'd0;
         endcase
     end
+    
+    //----------------------------------------------------------
+    // Actualización inmediata de dígitos
+    //----------------------------------------------------------
+    reg [4:0] hour_prev;
+    reg [5:0] minute_prev;
+    wire time_changed = (hour_disp != hour_prev) || (minute != minute_prev);
+
+    always @(posedge clk) begin
+        hour_prev   <= hour_disp;
+        minute_prev <= minute;
+    end
 
     //----------------------------------------------------------
     // FSM principal
@@ -283,7 +295,7 @@ module vram_background_writer (
                 // ST_IDLE: Espera tick_1hz
                 //----------------------------------------------
                 ST_IDLE: begin
-                    if (tick_1hz) begin
+                    if (tick_1hz || time_changed) begin
                         slot_idx <= 3'd0;
                         state    <= ST_LOAD_SLOT;
                     end
