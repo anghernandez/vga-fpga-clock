@@ -199,17 +199,24 @@ module vram_background_writer (
     end
     
     //----------------------------------------------------------
-    // Actualización inmediata de dígitos
+    // Actualización inmediata de dígitos/formato
     //----------------------------------------------------------
     reg [4:0] hour_prev;
     reg [5:0] minute_prev;
-    wire time_changed = (hour_disp != hour_prev) || (minute != minute_prev);
+    reg       fmt_prev;
+    reg       am_pm_prev;
+    
+    wire time_changed = (hour_disp != hour_prev) || 
+                    (minute != minute_prev)   ||
+                    (fmt_sel != fmt_prev)      ||
+                    (am_pm  != am_pm_prev);
 
     always @(posedge clk) begin
         hour_prev   <= hour_disp;
         minute_prev <= minute;
+        fmt_prev    <= fmt_sel;
+        am_pm_prev  <= am_pm;
     end
-
     //----------------------------------------------------------
     // FSM principal
     //----------------------------------------------------------
