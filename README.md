@@ -29,7 +29,7 @@ Diseño e implementación de un sistema digital en FPGA que visualiza un reloj H
 ## Arquitectura del sistema
 
 ```
-CLK100MHZ → (÷4 via contador 2 bits) → 25 MHz
+CLK100MHZ → (clocking Wizard) → 25 MHz
                       │
                       ├── vga_controller ──────────→ VGA_HS / VGA_VS / RGB
                       │        │ lee
@@ -44,8 +44,6 @@ CLK100MHZ → (÷4 via contador 2 bits) → 25 MHz
                       │
                       └── debounce × 2 ←── BTNU, BTND
 ```
-
-El reloj de píxel de 25 MHz se deriva de CLK100MHZ sin PLL ni IP cores, usando únicamente el bit [1] de un contador de 2 bits.
 
 ---
 
