@@ -19,7 +19,7 @@ Diseño e implementación de un sistema digital en FPGA que visualiza un reloj H
 |---|---|
 | VGA controller + timing | ✅ Completo |
 | VRAM dual-port (BRAM) | ✅ Completo |
-| Generador de imagen / fondo | 🔄 En desarrollo |
+| Generador de imagen / fondo | ✅ Completo |
 | Control de hora | ✅ Completo |
 | Integración del sistema | ✅ Completo |
 | Simulación y testbench | ✅ Completo |
