@@ -1,29 +1,3 @@
-// =============================================================================
-// bg_color.v
-// Módulo combinacional de fondo pixel-art para reloj VGA 640×480
-// EL3313 Taller de Diseño Digital - I Sem 2026
-//
-// Traducción directa de vga_sim.py (build_bg + helpers).
-// Puramente combinacional: always @(*), sin registros, sin reloj.
-//
-// Entradas:
-//   x, y      - coordenada del píxel actual (0-639, 0-479)
-//   phase     - 2'b00 DAWN | 2'b01 DAY | 2'b10 DUSK | 2'b11 NIGHT
-//   astro_cy  - Y fija del astro según fase (ver top_clock_vga.v)
-//
-// Salida:
-//   rgb       - color RGB332 del píxel de fondo
-//
-// Orden de capas (de atrás hacia adelante):
-//   1. Cielo base
-//   2. Estrellas   (solo DAWN / NIGHT)
-//   3. Astro       (luna o sol)
-//   4. Nubes
-//   5. Montaña B   (trasera, cx=210)
-//   6. Montaña A   (delantera, cx=320)
-//   7. Suelo
-// =============================================================================
-
 module bg_color (
     input  wire [9:0] x,
     input  wire [9:0] y,
@@ -35,139 +9,129 @@ module bg_color (
 // ---------------------------------------------------------------------------
 // Parámetros de fase
 // ---------------------------------------------------------------------------
-localparam DAWN  = 2'b00;
-localparam DAY   = 2'b01;
-localparam DUSK  = 2'b10;
-localparam NIGHT = 2'b11;
+
+localparam DAWN  = 2'b00; // Madrugada
+localparam DAY   = 2'b01; // Día
+localparam DUSK  = 2'b10; // Tarde
+localparam NIGHT = 2'b11; // Noche
 
 // ---------------------------------------------------------------------------
-// Helpers RGB888→RGB332
-// r3g3b2: toma los 3 MSB de R, 3 MSB de G, 2 MSB de B
-// Los valores de color abajo ya están pre-calculados en RGB332.
+// Colores de cielo
 // ---------------------------------------------------------------------------
-// Macro local: rgb332(r8,g8,b8) = {r8[7:5], g8[7:5], b8[7:6]}
-// Se usan funciones de tarea de valor constante para claridad.
+
+localparam [7:0] SKY_DAWN  = 8'b000_000_01; 
+localparam [7:0] SKY_DAY   = 8'b010_100_11;
+localparam [7:0] SKY_DUSK  = 8'b101_001_00;
+localparam [7:0] SKY_NIGHT = 8'b000_000_01;
 
 // ---------------------------------------------------------------------------
-// Colores de cielo RGB332 (pre-calculados desde Python)
-//   DAWN  sky (24,16,58)  → R=24→000, G=16→000, B=58→01  → 8'h01
-//   DAY   sky (72,152,220)→ R=72→010, G=152→100,B=220→11 → 8'h4B  (010_100_11)
-//   DUSK  sky (184,60,16) → R=184→101,G=60→001, B=16→00  → 8'hA4  (101_001_00)
-//   NIGHT sky (12,20,48)  → R=12→000, G=20→000, B=48→01  → 8'h01
+// Colores de suelo
 // ---------------------------------------------------------------------------
-localparam [7:0] SKY_DAWN  = 8'b000_000_01;   // (24,16,58)
-localparam [7:0] SKY_DAY   = 8'b010_100_11;   // (72,152,220)
-localparam [7:0] SKY_DUSK  = 8'b101_001_00;   // (184,60,16)
-localparam [7:0] SKY_NIGHT = 8'b000_000_01;   // (12,20,48)
+
+localparam [7:0] GROUND_DAWN_GRASS  = 8'b000_001_01;
+localparam [7:0] GROUND_DAWN_BASE   = 8'b000_000_00;
+localparam [7:0] GROUND_DAWN_DARK   = 8'b000_001_00;
+
+localparam [7:0] GROUND_DAY_GRASS   = 8'b001_100_01;
+localparam [7:0] GROUND_DAY_BASE    = 8'b001_011_01;
+localparam [7:0] GROUND_DAY_DARK    = 8'b000_010_01;
+
+localparam [7:0] GROUND_DUSK_GRASS  = 8'b010_001_00;
+localparam [7:0] GROUND_DUSK_BASE   = 8'b001_001_00;
+localparam [7:0] GROUND_DUSK_DARK   = 8'b001_000_00;
+
+localparam [7:0] GROUND_NIGHT_GRASS = 8'b000_001_01;
+localparam [7:0] GROUND_NIGHT_BASE  = 8'b000_001_00;
+localparam [7:0] GROUND_NIGHT_DARK  = 8'b000_000_00;
 
 // ---------------------------------------------------------------------------
-// Colores de suelo RGB332
-// GROUND_COLORS = {phase: (base, dark, grass)}
-//   DAWN  base(18,48,18)  dark(12,32,12)  grass(26,64,26)
-//   DAY   base(42,122,42) dark(26,90,26)  grass(58,154,58)
-//   DUSK  base(60,36,8)   dark(40,24,4)   grass(88,56,16)
-//   NIGHT base(14,36,14)  dark(8,22,8)    grass(20,52,20)
+// Colores de río
 // ---------------------------------------------------------------------------
-localparam [7:0] GROUND_DAWN_GRASS  = 8'b000_001_01;  // (26,64,26)
-localparam [7:0] GROUND_DAWN_BASE   = 8'b000_000_00;  // (18,48,18)
-localparam [7:0] GROUND_DAWN_DARK   = 8'b000_001_00;  // (12,32,12) ≈ misma banda
 
-localparam [7:0] GROUND_DAY_GRASS   = 8'b001_100_01;  // (58,154,58)
-localparam [7:0] GROUND_DAY_BASE    = 8'b001_011_01;  // (42,122,42)
-localparam [7:0] GROUND_DAY_DARK    = 8'b000_010_01;  // (26,90,26)
-
-localparam [7:0] GROUND_DUSK_GRASS  = 8'b010_001_00;  // (88,56,16)
-localparam [7:0] GROUND_DUSK_BASE   = 8'b001_001_00;  // (60,36,8)
-localparam [7:0] GROUND_DUSK_DARK   = 8'b001_000_00;  // (40,24,4)
-
-localparam [7:0] GROUND_NIGHT_GRASS = 8'b000_001_01;  // (20,52,20)
-localparam [7:0] GROUND_NIGHT_BASE  = 8'b000_001_00;  // (14,36,14)
-localparam [7:0] GROUND_NIGHT_DARK  = 8'b000_000_00;  // (8,22,8)
+localparam [7:0] RIVER_DAWN  = 8'b000_001_01;
+localparam [7:0] RIVER_DAY   = 8'b001_011_11;
+localparam [7:0] RIVER_DUSK  = 8'b011_001_00;
+localparam [7:0] RIVER_NIGHT = 8'b000_001_01;
+localparam [7:0] RIVER_SHINE = 8'hFF;  // blanco para destellos
 
 // ---------------------------------------------------------------------------
 // Colores de nubes RGB332
-// CLOUD_COLORS = {phase: (dark, light, highlight)}
-//   DAWN  dark(90,40,152) light(112,56,176) hl(168,88,72)
-//   DAY   dark(192,192,212) light(224,224,236) hl(255,255,255)
-//   DUSK  dark(120,32,154) light(152,48,180) hl(208,96,48)
-//   NIGHT dark(48,24,104) light(72,40,128) hl(104,72,160)
 // ---------------------------------------------------------------------------
-localparam [7:0] CLOUD_DAWN_DARK  = 8'b010_001_10;  // (90,40,152)
-localparam [7:0] CLOUD_DAWN_LIGHT = 8'b011_001_10;  // (112,56,176)
-localparam [7:0] CLOUD_DAWN_HL    = 8'b101_010_01;  // (168,88,72)
 
-localparam [7:0] CLOUD_DAY_DARK   = 8'b110_110_11;  // (192,192,212)
-localparam [7:0] CLOUD_DAY_LIGHT  = 8'b111_111_11;  // (224,224,236)
-localparam [7:0] CLOUD_DAY_HL     = 8'b111_111_11;  // (255,255,255)
+localparam [7:0] CLOUD_DAWN_DARK  = 8'b010_001_10;
+localparam [7:0] CLOUD_DAWN_LIGHT = 8'b011_001_10;
+localparam [7:0] CLOUD_DAWN_HL    = 8'b101_010_01;
 
-localparam [7:0] CLOUD_DUSK_DARK  = 8'b011_001_10;  // (120,32,154)
-localparam [7:0] CLOUD_DUSK_LIGHT = 8'b100_001_10;  // (152,48,180)
-localparam [7:0] CLOUD_DUSK_HL    = 8'b110_011_01;  // (208,96,48)
+localparam [7:0] CLOUD_DAY_DARK   = 8'b110_110_11;
+localparam [7:0] CLOUD_DAY_LIGHT  = 8'b111_111_11;
+localparam [7:0] CLOUD_DAY_HL     = 8'b111_111_11;
 
-localparam [7:0] CLOUD_NIGHT_DARK = 8'b001_000_10;  // (48,24,104)
-localparam [7:0] CLOUD_NIGHT_LIGHT= 8'b010_001_10;  // (72,40,128)
-localparam [7:0] CLOUD_NIGHT_HL   = 8'b011_010_10;  // (104,72,160)
+localparam [7:0] CLOUD_DUSK_DARK  = 8'b011_001_10;
+localparam [7:0] CLOUD_DUSK_LIGHT = 8'b100_001_10;
+localparam [7:0] CLOUD_DUSK_HL    = 8'b110_011_01;
+
+localparam [7:0] CLOUD_NIGHT_DARK = 8'b001_000_10;
+localparam [7:0] CLOUD_NIGHT_LIGHT= 8'b010_001_10;
+localparam [7:0] CLOUD_NIGHT_HL   = 8'b011_010_10;
 
 // ---------------------------------------------------------------------------
-// Colores de montañas RGB332
-// MTN_COLORS = {phase: (A_light, A_dark, B_light, B_dark)}
-//   DAWN  AL(42,64,96) AD(26,48,80) BL(26,46,68) BD(16,32,52)
-//   DAY   AL(58,144,64) AD(42,120,48) BL(46,120,48) BD(32,96,36)
-//   DUSK  AL(52,20,8) AD(36,12,4) BL(30,12,4) BD(20,8,2)
-//   NIGHT AL(24,36,48) AD(14,24,36) BL(14,26,40) BD(8,16,24)
+// Colores de montañas
 // ---------------------------------------------------------------------------
-localparam [7:0] MTN_DAWN_AL  = 8'b001_010_01;  // (42,64,96)
-localparam [7:0] MTN_DAWN_AD  = 8'b000_001_01;  // (26,48,80)
-localparam [7:0] MTN_DAWN_BL  = 8'b000_001_01;  // (26,46,68)
-localparam [7:0] MTN_DAWN_BD  = 8'b000_001_01;  // (16,32,52)
 
-localparam [7:0] MTN_DAY_AL   = 8'b001_100_01;  // (58,144,64)
-localparam [7:0] MTN_DAY_AD   = 8'b001_011_01;  // (42,120,48)
-localparam [7:0] MTN_DAY_BL   = 8'b001_011_01;  // (46,120,48)
-localparam [7:0] MTN_DAY_BD   = 8'b001_011_00;  // (32,96,36)
+localparam [7:0] MTN_DAWN_AL  = 8'b001_010_01;
+localparam [7:0] MTN_DAWN_AD  = 8'b000_001_01;
+localparam [7:0] MTN_DAWN_BL  = 8'b000_001_01;
+localparam [7:0] MTN_DAWN_BD  = 8'b000_001_01;
 
-localparam [7:0] MTN_DUSK_AL  = 8'b001_000_00;  // (52,20,8)
-localparam [7:0] MTN_DUSK_AD  = 8'b001_000_00;  // (36,12,4)
-localparam [7:0] MTN_DUSK_BL  = 8'b000_000_00;  // (30,12,4)
-localparam [7:0] MTN_DUSK_BD  = 8'b000_000_00;  // (20,8,2)
+localparam [7:0] MTN_DAY_AL   = 8'b001_100_01;
+localparam [7:0] MTN_DAY_AD   = 8'b001_011_01;
+localparam [7:0] MTN_DAY_BL   = 8'b001_011_01;
+localparam [7:0] MTN_DAY_BD   = 8'b001_011_00;
 
-localparam [7:0] MTN_NIGHT_AL = 8'b001_010_10;  // (24,36,48)
-localparam [7:0] MTN_NIGHT_AD = 8'b000_001_10;  // (14,24,36)
-localparam [7:0] MTN_NIGHT_BL = 8'b000_010_10;  // (14,26,40)
-localparam [7:0] MTN_NIGHT_BD = 8'b000_001_01;  // (8,16,24)
+localparam [7:0] MTN_DUSK_AL  = 8'b001_000_00;
+localparam [7:0] MTN_DUSK_AD  = 8'b001_000_00;
+localparam [7:0] MTN_DUSK_BL  = 8'b000_000_00;
+localparam [7:0] MTN_DUSK_BD  = 8'b000_000_00;
+
+localparam [7:0] MTN_NIGHT_AL = 8'b001_010_10;
+localparam [7:0] MTN_NIGHT_AD = 8'b000_001_10;
+localparam [7:0] MTN_NIGHT_BL = 8'b000_010_10;
+localparam [7:0] MTN_NIGHT_BD = 8'b000_001_01;
 
 // ---------------------------------------------------------------------------
-// Colores del astro RGB332
+// Colores del astro
 // ---------------------------------------------------------------------------
+
 // Luna núcleo/anillo/manchas
-localparam [7:0] MOON_OUTER  = 8'b110_101_00;  // (220,188,48)  → 110_101_00
-localparam [7:0] MOON_INNER  = 8'b111_110_01;  // (242,212,80)  → 111_110_01
-localparam [7:0] MOON_SPOT   = 8'b110_100_00;  // (192,158,28)  → 110_100_00
+localparam [7:0] MOON_OUTER  = 8'b110_101_00;
+localparam [7:0] MOON_INNER  = 8'b111_110_01;
+localparam [7:0] MOON_SPOT   = 8'b110_100_00;
 
 // Sol día
-localparam [7:0] SUN_OUTER   = 8'b111_111_10;  // (255,255,200) → 111_111_10
-localparam [7:0] SUN_INNER   = 8'b111_111_01;  // (255,240,120) → 111_111_01
-localparam [7:0] SUN_RAY     = 8'b111_110_00;  // (255,208,32)  → 111_110_00
+localparam [7:0] SUN_OUTER   = 8'b111_111_10;
+localparam [7:0] SUN_INNER   = 8'b111_111_01;
+localparam [7:0] SUN_RAY     = 8'b111_110_00;
 
 // Sol atardecer (halos concéntricos)
-localparam [7:0] DUSK_H1     = 8'b111_010_00;  // (255,80,16)   → 111_010_00
-localparam [7:0] DUSK_H2     = 8'b111_100_01;  // (255,148,40)  → 111_100_01
-localparam [7:0] DUSK_H3     = 8'b111_110_01;  // (255,210,72)  → 111_110_01
-localparam [7:0] DUSK_CORE   = 8'b111_111_10;  // (255,248,160) → 111_111_10
+localparam [7:0] DUSK_H1     = 8'b111_010_00;
+localparam [7:0] DUSK_H2     = 8'b111_100_01;
+localparam [7:0] DUSK_H3     = 8'b111_110_01;
+localparam [7:0] DUSK_CORE   = 8'b111_111_10;
 
 // ---------------------------------------------------------------------------
 // Constantes de geometría
 // ---------------------------------------------------------------------------
+
 localparam signed [10:0] ASTRO_CX    = 11'sd530;
 localparam        [9:0]  HORIZON_Y   = 10'd340;
 
 // Montaña A
 localparam [9:0] MTN_A_CX     = 10'd320;
-localparam [3:0] MTN_A_LEVELS = 4'd15;   // índice 0..15 → 16 niveles
+localparam [3:0] MTN_A_LEVELS = 4'd15;
 
 // Montaña B
 localparam [9:0] MTN_B_CX     = 10'd210;
-localparam [3:0] MTN_B_LEVELS = 4'd11;   // índice 0..11 → 12 niveles
+localparam [3:0] MTN_B_LEVELS = 4'd11;
 
 localparam [4:0] STEP_H = 5'd16;
 localparam [4:0] STEP_W = 5'd16;
@@ -176,43 +140,30 @@ localparam [4:0] STEP_W = 5'd16;
 localparam [5:0] MOON_R_OUTER = 6'd30;
 localparam [5:0] MOON_R_INNER = 6'd24;
 localparam [5:0] SUN_R_OUTER  = 6'd26;
-localparam [5:0] SUN_R_INNER  = 6'd18;   // 26-8
+localparam [5:0] SUN_R_INNER  = 6'd18;
 localparam [5:0] DUSK_R1      = 6'd44;
 localparam [5:0] DUSK_R2      = 6'd32;
 localparam [5:0] DUSK_R3      = 6'd20;
 localparam [5:0] DUSK_R4      = 6'd10;
 
-// ---------------------------------------------------------------------------
-// Wires de trabajo (signed para restas de coordenadas)
-// ---------------------------------------------------------------------------
 wire signed [10:0] dx_astro = $signed({1'b0, x}) - ASTRO_CX;
 wire signed [10:0] dy_astro = $signed({1'b0, y}) - $signed({1'b0, astro_cy});
-
-// dist² del astro (capped a 22 bits, máx ~530²+480² ≈ 510.000 < 2²⁰)
 wire [21:0] dist2_astro = dx_astro * dx_astro + dy_astro * dy_astro;
 
 // ---------------------------------------------------------------------------
 // Funciones de pertenencia a pirámide
 // Devuelven 1 si el píxel (x,y) pertenece a ese nivel de la pirámide.
-// Se implementa con un generate + OR de todos los niveles.
 // ---------------------------------------------------------------------------
-
-// ── Pirámide helper: dado cx, level_idx (0=pico), devuelve si (x,y) está en él
-// Para evitar multiplicaciones: half_w = (level*2+1)*STEP_W/2 = level*STEP_W + STEP_W/2
-// Usamos la forma: x dentro de [cx - half_w, cx + half_w)
-//                  y dentro de [HORIZON_Y - (level+1)*STEP_H, HORIZON_Y - level*STEP_H)
 
 // Montaña A - 16 niveles
 // Montaña B - 12 niveles
 // Se implementa con bloques generate.
 
-// Señales de resultado de pirámide
 wire in_mtn_a;
-wire in_mtn_a_shadow;   // en la mitad derecha (shadow) de montaña A
+wire in_mtn_a_shadow;
 wire in_mtn_b;
 wire in_mtn_b_shadow;
 
-// Arrays temporales para el OR de niveles
 wire [15:0] mtn_a_hit;
 wire [15:0] mtn_a_shad;
 wire [11:0] mtn_b_hit;
@@ -265,23 +216,8 @@ assign in_mtn_b        = |mtn_b_hit;
 assign in_mtn_b_shadow = |(mtn_b_hit & mtn_b_shad);
 
 // ---------------------------------------------------------------------------
-// Nubes - 2 grupos, 4 capas cada uno (rectángulos apilados hacia arriba)
-// CLOUD_DEFS = [(130,108,110), (490,88,90)]
-// layers relativas a cy_base (empezando hacia ARRIBA):
-//   capa 0 (base):  w=wb,    h=14, dy_from_base=0        → y=[cy_base..cy_base+14)
-//   capa 1:         w=wb-18, h=16, dy_from_base=-16       → y=[cy_base-16..cy_base)
-//   capa 2:         w=wb-36, h=14, dy_from_base=-16-14    → y=[cy_base-30..cy_base-16)
-//   capa 3 (cima):  w=wb-54, h=12, dy_from_base=-16-14-12 → y=[cy_base-42..cy_base-30)
-//
-// El highlight es un sub-rect: x+4, y+2, w//3, h=6 dentro de capas LIGHT (1,2,3)
-// Para RGB332 usamos: capa 0 = DARK, capas 1-3 = LIGHT, sub-rect = HL
+// Nubes - 2 grupos, 4 capas cada uno
 // ---------------------------------------------------------------------------
-
-// Nube izquierda: cx=130, cy_base=108, wb=110
-// Nube derecha:   cx=490, cy_base=88,  wb=90
-
-// Función inline: ¿está (x,y) en un rect [x0,x0+w) × [y0,y0+h)?
-// Se expande a wires para cada nube×capa.
 
 // ── Nube izquierda (cx=130, cy=108, wb=110)
 localparam [9:0] CL_CX = 10'd130;
@@ -297,7 +233,6 @@ wire cl_L2 = (x >= CL_CX - (CL_WB-36)/2) && (x < CL_CX + (CL_WB-36)/2) &&
 wire cl_L3 = (x >= CL_CX - (CL_WB-54)/2) && (x < CL_CX + (CL_WB-54)/2) &&
              (y >= CL_CY - 10'd42)         && (y < CL_CY - 10'd30);
 
-// Highlight de nube izquierda (solo dentro de capas LIGHT = L1,L2,L3)
 wire cl_HL1 = cl_L1 && (x >= CL_CX - (CL_WB-18)/2 + 10'd4) &&
                         (x <  CL_CX - (CL_WB-18)/2 + 10'd4 + (CL_WB-18)/3) &&
                         (y >= CL_CY - 10'd16 + 10'd2) && (y < CL_CY - 10'd16 + 10'd8);
@@ -345,7 +280,7 @@ wire in_cloud_hl = in_cloud_left_hl || in_cloud_right_hl;
 wire in_cloud_dk = in_cloud_left_dk || in_cloud_right_dk;
 
 // ---------------------------------------------------------------------------
-// Estrellas - 20 posiciones fijas (solo DAWN / NIGHT)
+// Estrellas - 20 posiciones fijas
 // ---------------------------------------------------------------------------
 wire is_star;
 assign is_star = (
@@ -362,8 +297,7 @@ assign is_star = (
 );
 
 // ---------------------------------------------------------------------------
-// Astro - wires de pertenencia
-// dist² ya calculado arriba (dist2_astro)
+// Astros
 // ---------------------------------------------------------------------------
 
 // Luna (DAWN / NIGHT)
@@ -402,11 +336,6 @@ wire in_ray_rght = (dy_astro >= -3) && (dy_astro < 3) &&
                    (dx_astro <  (SUN_R_OUTER + RAY_GAP + RAY_LEN));
 
 // Rayos diagonales: triángulos pequeños
-// Para cada diagonal (sx,sy) ∈ {(1,1),(1,-1),(-1,1),(-1,-1)}
-// origen (x0,y0) = (cx + sx*(R+6), cy + sy*(R+6))
-// polígono: (x0, y0), (x0+sx*20, y0+sy*5), (x0+sx*5, y0+sy*20)
-// Aproximamos como: |dx| > (R+6) && |dy| > (R+6) && dx*sy - dy*sx > 0 && en bbox
-// Simplificación práctica: bbox del triángulo con condición diagonal
 localparam signed [10:0] DIAG_OFF = SUN_R_OUTER + 6;   // 32
 localparam signed [10:0] DIAG_LEN = 20;
 
@@ -437,13 +366,21 @@ wire in_dusk_core = (dist2_astro <= DUSK_R4 * DUSK_R4);   // ≤ 100
 // ---------------------------------------------------------------------------
 wire in_ground       = (y >= HORIZON_Y);
 wire in_ground_grass = (y >= HORIZON_Y) && (y < HORIZON_Y + 10'd8);
-// Patrón de baldosas: bloques 24×16 alternados
-// (bx//24 + by//16) % 2 == 0  → dark
 wire in_ground_tile_dark;
 wire [5:0] tile_bx = x[9:0] / 10'd24;   // columna de bloque (0..26)
 wire [4:0] tile_by = y[9:0] / 10'd16;   // fila de bloque   (0..29)
 assign in_ground_tile_dark = in_ground && !in_ground_grass &&
                              ((tile_bx[0] ^ tile_by[0]) == 1'b0);
+
+// Río: banda y=358..400, ancho completo
+wire in_river = (y >= 10'd358) && (y < 10'd400);
+
+// Destellos: 3 líneas horizontales desplazadas entre sí
+// patrón: (x + desplazamiento) % periodo < grosor
+wire river_shine =
+    ( (y >= 10'd362) && (y < 10'd364) && (x[4:0] < 5'd6)              ) ||
+    ( (y >= 10'd374) && (y < 10'd376) && ((x + 10'd10) % 10'd28 < 5'd8) ) ||
+    ( (y >= 10'd388) && (y < 10'd390) && ((x + 10'd20) % 10'd22 < 5'd5) );
 
 // ---------------------------------------------------------------------------
 // Lógica principal de pintado - orden de prioridad (último sobreescribe)
@@ -459,8 +396,8 @@ always @(*) begin
 
     // ── 2. Estrellas (solo DAWN / NIGHT)
     if ((phase == DAWN || phase == NIGHT) && is_star) begin
-        rgb = (phase == NIGHT) ? 8'b110_110_10 :   // bright=210 → 110_110_10
-                                 8'b100_100_10 ;    // bright=150 → 100_100_10
+        rgb = (phase == NIGHT) ? 8'b110_110_10 :
+                                 8'b100_100_10 ;
     end
 
     // ── 3. Astro
@@ -468,7 +405,7 @@ always @(*) begin
         DAWN, NIGHT: begin
             if (in_moon_outer) rgb = MOON_OUTER;
             if (in_moon_inner) rgb = MOON_INNER;
-            // manchas solo si están dentro del disco exterior
+            
             if (in_moon_outer && in_moon_spot1) rgb = MOON_SPOT;
             if (in_moon_outer && in_moon_spot2) rgb = MOON_SPOT;
         end
@@ -487,8 +424,6 @@ always @(*) begin
 
     // ── 4. Nubes
     if (in_cloud) begin
-        // Selección de paleta por fase
-        // dark = capa base, light = capas 1-3, hl = sub-rect highlight
         if (in_cloud_dk) begin
             case (phase)
                 DAWN:    rgb = CLOUD_DAWN_DARK;
@@ -504,7 +439,7 @@ always @(*) begin
                 default: rgb = CLOUD_NIGHT_LIGHT;
             endcase
         end
-        // Highlight sobreescribe (más brillante)
+        
         if (in_cloud_hl) begin
             case (phase)
                 DAWN:    rgb = CLOUD_DAWN_HL;
@@ -562,6 +497,14 @@ always @(*) begin
                 DUSK:    rgb = GROUND_DUSK_GRASS;
                 default: rgb = GROUND_NIGHT_GRASS;
             endcase
+        end else if (in_river) begin
+            case (phase)
+                DAWN:    rgb = RIVER_DAWN;
+                DAY:     rgb = RIVER_DAY;
+                DUSK:    rgb = RIVER_DUSK;
+                default: rgb = RIVER_NIGHT;
+            endcase
+            if (river_shine) rgb = RIVER_SHINE;
         end else if (in_ground_tile_dark) begin
             case (phase)
                 DAWN:    rgb = GROUND_DAWN_DARK;
