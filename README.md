@@ -51,18 +51,18 @@ El reloj de píxel de 25 MHz se deriva de CLK100MHZ sin PLL ni IP cores, usando 
 
 ## Módulos
 
-| Módulo | Autor | Descripción |
-|---|---|---|
-| `top_clock_vga.v` | Milagro | Integración de todos los módulos; calcula fase del día y posición del astro |
-| `clock_controller.v` | Milagro | Timekeeping HH:MM:SS, tick 1 Hz, formato 12h/24h, ajuste por botones |
-| `debounce.v` | Milagro | Sincronizador de 2 FF + contador de estabilidad 20 ms |
-| `vga_controller.v` | Angie | Controlador VGA jerárquico con pipeline de 2 etapas |
-| `vga_timing.v` | Angie | Generador de contadores H/V y señales hsync/vsync |
-| `vga_memory_interface.v` | Angie | Cálculo de dirección VRAM: `y×640 + x` |
-| `vram_dual_port.v` | Angie | BRAM dual-port 307 200 × 8 bits (RGB332) |
-| `vram_background_writer.v` | Brayan / Milagro | FSM de 6 estados: renderiza fondo, dos puntos y dígitos del reloj en VRAM |
-| `bg_color.v` | Brayan | Generador combinacional de paisaje dinámico por capas según fase del día |
-| `digit_rom.v` | Angie | ROM combinacional de bitmaps 8×16 para dígitos 0–9 y letras A, M, P, H, 2, 4 |
+| Módulo | Descripción |
+|---|---|
+| `top_clock_vga.v` | Integración de todos los módulos; calcula fase del día y posición del astro |
+| `clock_controller.v` | Timekeeping HH:MM:SS, tick 1 Hz, formato 12h/24h, ajuste por botones |
+| `debounce.v` | Sincronizador de 2 FF + contador de estabilidad 20 ms |
+| `vga_controller.v` | Controlador VGA jerárquico con pipeline de 2 etapas |
+| `vga_timing.v` | Generador de contadores H/V y señales hsync/vsync |
+| `vga_memory_interface.v` | Cálculo de dirección VRAM: `y×640 + x` |
+| `vram_dual_port.v` | BRAM dual-port 307 200 × 8 bits (RGB332) |
+| `vram_background_writer.v` | FSM de 6 estados: renderiza fondo, dos puntos y dígitos del reloj en VRAM |
+| `bg_color.v` | Generador combinacional de paisaje dinámico por capas según fase del día |
+| `digit_rom.v` | ROM combinacional de bitmaps 8×16 para dígitos 0–9 y letras A, M, P, H, 2, 4 |
 
 ---
 
@@ -139,10 +139,6 @@ Proyecto_Digitales/
 
 ## Documentación técnica
 
-Los archivos fuente incluyen comentarios `//!` compatibles con **TerosHDL** (extensión de VS Code). Para generar el sitio de documentación localmente:
+La documentación técnica autogenerada se encuentra en la rama [`docs/autogenerada`](../../tree/docs/autogenerada).
 
-```bash
-node scripts/gen_docs.mjs --src src/ --out docs/
-```
-
-El archivo `docs/index.html` resultante incluye descripción de cada módulo, tabla de puertos y parámetros, y diagrama de instancias.
+Incluye la descripción de cada módulo, tabla de puertos y parámetros, extraída de los comentarios `//!` TerosHDL presentes en todos los archivos fuente.
