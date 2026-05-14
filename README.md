@@ -1,178 +1,222 @@
-
 # Controlador VGA con Reloj Digital
 
-**Curso:** Taller de Diseño Digital (EL3313) — TEC, I Semestre 2026  
-**Integrantes:** Milagro Rojas Sánchez · Angie Hernández Mairena · Brayan Solís Rojas  
-**Profesor:** Luis G. León-Vega, Ph.D  
-**Tarjeta:** Nexys A7-100T (Xilinx Artix-7, xc7a100tcsg324-1)
+Sistema digital implementado en FPGA que visualiza un reloj en tiempo real sobre una pantalla VGA con fondo dinámico dependiente de la fase del día.
 
-# Proyecto 1 — Controlador VGA con Reloj Digital
-
-**Curso:** Taller de Diseño Digital (EL3313) — TEC, I Semestre 2026  
-
-**Integrantes:** Milagro Rojas Sánchez · Angie Hernández Mairena · Brayan Solís Rojas  
-
-**Profesor:** Luis G. León-Vega, Ph.D
-
+Proyecto desarrollado para el curso **Taller de Diseño Digital (EL3313)** del Tecnológico de Costa Rica.
 
 ---
 
-## Descripción
+## Información del proyecto
 
-
-Diseño e implementación de un sistema digital en FPGA que visualiza un reloj HH:MM:SS en tiempo real sobre una pantalla VGA (640×480 @ 60 Hz). El usuario puede ajustar la hora y seleccionar entre formato 12h y 24h mediante los switches y botones de la tarjeta. El fondo de pantalla es un paisaje dinámico que cambia según la fase del día (madrugada, día, tarde, noche).
-
----
-
-## Estado del proyecto
-
-| Módulo | Estado |
+| Campo | Información |
 |---|---|
-| VGA controller + timing | ✅ Completo |
-| VRAM dual-port (BRAM) | ✅ Completo |
-| Generador de imagen / fondo | ✅ Completo |
-| Control de hora | ✅ Completo |
-| Integración del sistema | ✅ Completo |
-| Simulación y testbench | ✅ Completo |
+| Curso | Taller de Diseño Digital (EL3313) |
+| Institución | Tecnológico de Costa Rica |
+| Profesor | Luis G. León-Vega, Ph.D |
+| FPGA | Nexys A7-100T (Xilinx Artix-7) |
+| Resolución VGA | 640×480 @ 60 Hz |
 
-Sistema digital implementado en FPGA Nexys A7 que visualiza un reloj HH:MM:SS en una pantalla VGA (640×480 @ 60 Hz). El usuario puede ajustar la hora mediante switches y botones de la tarjeta, y seleccionar entre formato 12h y 24h.
+### Integrantes
 
+- Milagro Rojas Sánchez
+- Angie Hernández Mairena
+- Brayan Solís Rojas
 
 ---
 
-## Arquitectura del sistema
+# Descripción
 
-```
+El sistema implementa un reloj digital en formato HH:MM:SS desplegado sobre una interfaz VGA.
 
-CLK100MHZ → (clocking Wizard) → 25 MHz
+El usuario puede:
+
+- Ajustar horas y minutos mediante botones físicos.
+- Seleccionar formato 12h o 24h.
+- Visualizar un paisaje dinámico generado completamente en hardware.
+
+El fondo cambia automáticamente entre:
+
+- Madrugada
+- Día
+- Atardecer
+- Noche
+
+Todo el sistema fue desarrollado en Verilog utilizando una arquitectura modular jerárquica.
+
+---
+
+# Características principales
+
+- Controlador VGA 640×480 @ 60 Hz
+- Pipeline de video
+- VRAM dual-port usando BRAM
+- Generación procedural del paisaje
+- Renderizado de texto mediante ROM bitmap
+- Máquina de estados para escritura de fondo
+- Debouncing por hardware
+- Soporte 12h / 24h
+- Diseño completamente sintetizable
+
+---
+
+# Arquitectura del sistema
+
+```text
+CLK100MHZ → Clocking Wizard → 25 MHz
                       │
-                      ├── vga_controller ──────────→ VGA_HS / VGA_VS / RGB
-                      │        │ lee
-                      │   vram_dual_port (BRAM 640×480 × 8 bits RGB332)
-                      │        ↑ escribe
-                      ├── vram_background_writer ←── hour_disp, minute, second
-                      │        │ instancia            am_pm, fmt_sel, tick_1hz
-                      │        ├── bg_color           phase, astro_cy
+                      ├── vga_controller ─────→ VGA_HS / VGA_VS / RGB
+                      │        │
+                      │        └── vram_dual_port
+                      │
+                      ├── vram_background_writer
+                      │        ├── bg_color
                       │        └── digit_rom
                       │
-                      ├── clock_controller ←── SW[1:0], btn_inc_db, btn_dec_db
+                      ├── clock_controller
                       │
-                      └── debounce × 2 ←── BTNU, BTND
+                      └── debounce
 ```
 
 ---
 
-## Módulos
+# Módulos del sistema
 
-| Módulo | Descripción |
+| Módulo | Función |
 |---|---|
-| `top_clock_vga.v` | Integración de todos los módulos; calcula fase del día y posición del astro |
-| `clock_controller.v` | Timekeeping HH:MM:SS, tick 1 Hz, formato 12h/24h, ajuste por botones |
-| `debounce.v` | Sincronizador de 2 FF + contador de estabilidad 20 ms |
-| `vga_controller.v` | Controlador VGA jerárquico con pipeline de 2 etapas |
-| `vga_timing.v` | Generador de contadores H/V y señales hsync/vsync |
-| `vga_memory_interface.v` | Cálculo de dirección VRAM: `y×640 + x` |
-| `vram_dual_port.v` | BRAM dual-port 307 200 × 8 bits (RGB332) |
-| `vram_background_writer.v` | FSM de 6 estados: renderiza fondo, dos puntos y dígitos del reloj en VRAM |
-| `bg_color.v` | Generador combinacional de paisaje dinámico por capas según fase del día |
-| `digit_rom.v` | ROM combinacional de bitmaps 8×16 para dígitos 0–9 y letras A, M, P, H, 2, 4 |
+| `top_clock_vga.v` | Integración completa del sistema |
+| `clock_controller.v` | Manejo del reloj y ajustes |
+| `debounce.v` | Filtrado de rebotes de botones |
+| `vga_controller.v` | Pipeline y control VGA |
+| `vga_timing.v` | Generación de sincronización VGA |
+| `vga_memory_interface.v` | Cálculo de direcciones VRAM |
+| `vram_dual_port.v` | Memoria de video BRAM |
+| `vram_background_writer.v` | Renderizado de fondo y reloj |
+| `bg_color.v` | Generador de paisaje dinámico |
+| `digit_rom.v` | ROM de caracteres bitmap |
 
 ---
 
-CLK100MHZ → (÷4) → 25 MHz
-                      │
-                      ├── vga_controller ──→ VGA_HS / VGA_VS / RGB
-                      │        │ lee
-                      │   vram_dual_port (BRAM 640×480 × 8 bits)
-                      │        ↑ escribe
-                      ├── vram_background_writer ← hour_disp, minute, second, am_pm, fmt_sel, tick_1hz
-                      │
-                      ├── clock_controller ← SW[1:0], btn_inc, btn_dec
-                      │
-                      └── debounce × 2 ← BTNU, BTND
-```
+# Interfaz de usuario
 
-
-
-## Interfaz de usuario
-
-| Control | Función |
+| Entrada | Función |
 |---|---|
-| `BTNC` | Reset — reinicia el reloj a 00:00:00 |
-| `SW[0]` | Formato: 0 = 24h, 1 = 12h |
-| `SW[1]` | Campo de ajuste: 0 = horas, 1 = minutos |
-| `BTNU` | Incrementa el campo seleccionado |
-| `BTND` | Decrementa el campo seleccionado |
+| `BTNC` | Reset del sistema |
+| `SW[0]` | Selección 12h / 24h |
+| `SW[1]` | Selección de ajuste |
+| `BTNU` | Incremento |
+| `BTND` | Decremento |
 
 ---
 
+# Renderizado gráfico
 
-## Visualización en pantalla
+El sistema utiliza bitmaps almacenados en ROM para representar caracteres y números.
 
-Los dígitos del reloj se escalan desde bitmaps de 8×16 px almacenados en `digit_rom`:
+## Escalamiento
 
-- **Dígitos de hora/minuto/segundo** → escala ×8 → 64×128 px
-- **Letras de formato** (AM/PM/24H) → escala ×4 → 32×64 px
+| Elemento | Escala |
+|---|---|
+| Dígitos HH:MM:SS | ×8 |
+| Texto AM/PM/24H | ×4 |
 
-El fondo (`bg_color`) renderiza, en orden de prioridad:
+## Capas gráficas
 
-1. Cielo base según fase
-2. Estrellas (20 posiciones fijas, visibles en madrugada/noche)
-3. Astro: luna (madrugada/noche), sol con rayos (día), halos concéntricos (tarde)
-4. Nubes con tres capas y highlights
-5. Dos montañas con escalonado de 16 y 12 niveles (via `generate`)
-6. Suelo con hierba, patrón de baldosas y río con destellos
+El paisaje dinámico incluye:
+
+1. Cielo dependiente de la fase del día
+2. Estrellas
+3. Sol y luna
+4. Nubes multicapa
+5. Montañas
+6. Suelo y río
 
 ---
-## Simulación
+
+# Uso de recursos FPGA
+
+La arquitectura fue diseñada buscando eficiencia en recursos hardware:
+
+- Uso de BRAM para almacenamiento de video
+- Lógica combinacional para generación de paisaje
+- Pipeline simple para timing VGA
+- Minimización de LUTs mediante reutilización de módulos
+- Separación clara entre lógica secuencial y combinacional
+
+---
+
+# Simulación
 
 ```bash
 xvlog src/clock_controller.v sim/tb_clock_controller.v
+
 xelab tb_clock_controller -s tb_clock_controller_sim
+
 xsim tb_clock_controller_sim --runall
 ```
 
-El testbench instancia `clock_controller` con `TICK_MAX=9` para acelerar la simulación. Cubre reset, conteo normal, rollover de segundos/minutos/horas, ajuste con botones, formato 12h/24h y wrap en decrementos.
+El testbench valida:
+
+- Reset
+- Conteo normal
+- Rollovers
+- Ajustes por botones
+- Formato 12h / 24h
 
 ---
 
-## Estructura del repositorio
+# Estructura del repositorio
 
-```
+```text
 Proyecto_Digitales/
-├── src/                         # Fuentes RTL (todos los módulos documentados con //!)
-├── src/                    # Fuentes RTL
-│   ├── top_clock_vga.v
-│   ├── clock_controller.v
-│   ├── debounce.v
-│   ├── vga_controller.v
-│   ├── vga_timing.v
-│   ├── vga_memory_interface.v
-│   ├── vram_dual_port.v
-│   ├── vram_background_writer.v
-│   ├── bg_color.v
-│   └── digit_rom.v
-│   └── vram_background_writer.v
+├── src/
 ├── sim/
-│   └── tb_clock_controller.v
 ├── constraints/
-│   └── nexys_a7.xdc
 ├── scripts/
-│   └── gen_docs.mjs             # Generador de documentación HTML (Node.js, sin dependencias)
 ├── docs/
-│   └── index.html               # Documentación técnica autogenerada
-├── test_Mila/                   # Prueba de hardware independiente (no es entrega final)
+├── test_Mila/
 └── README.md
 ```
 
 ---
 
-## Documentación técnica
+# Documentación técnica
 
-La documentación técnica autogenerada se encuentra en la rama [`docs/autogenerada`](../../tree/docs/autogenerada).
+La documentación técnica autogenerada se encuentra en:
 
-Incluye la descripción de cada módulo, tabla de puertos y parámetros, extraída de los comentarios `//!` TerosHDL presentes en todos los archivos fuente.
-
-└── README.md
+```text
+docs/index.html
 ```
 
+Incluye:
+
+- Tabla de puertos
+- Parámetros
+- Descripción de módulos
+- Comentarios extraídos mediante TerosHDL
+
+---
+
+# Herramientas utilizadas
+
+- Verilog HDL
+- Vivado Design Suite
+- Xilinx Nexys A7
+- TerosHDL
+- Git & GitHub
+
+---
+
+# Resultados
+
+El sistema fue implementado exitosamente en FPGA y logra:
+
+- Generación estable VGA @ 60 Hz
+- Renderizado en tiempo real
+- Interfaz interactiva mediante switches y botones
+- Fondo dinámico completamente generado en hardware
+
+---
+
+# Licencia
+
+Proyecto académico desarrollado para fines educativos.
