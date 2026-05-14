@@ -10,4 +10,11 @@
 *.runs/
 *.gen/
 *.ip_user_files/
+
 vga-fpga-clock.srcs/utils_1/
+
+# VSCode
+.vscode/
+
+# Linux temp
+*~
