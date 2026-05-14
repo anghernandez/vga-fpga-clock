@@ -1,0 +1,7 @@
+vga_controller.v,verilog,xil_defaultlib,../../../gabrielqg/vga-digital-clock/project_Controlador VGA con Reloj Digital.srcs/sources_1/new/vga_controller.v,incdir="../../../project_ControladorVGAconRelojDigital.gen/sources_1/ip/clk_wiz_0"
+vga_memory_interface.v,verilog,xil_defaultlib,../../../gabrielqg/vga-digital-clock/project_Controlador VGA con Reloj Digital.srcs/sources_1/new/vga_memory_interface.v,incdir="../../../project_ControladorVGAconRelojDigital.gen/sources_1/ip/clk_wiz_0"
+vga_timing.v,verilog,xil_defaultlib,../../../gabrielqg/vga-digital-clock/project_Controlador VGA con Reloj Digital.srcs/sources_1/new/vga_timing.v,incdir="../../../project_ControladorVGAconRelojDigital.gen/sources_1/ip/clk_wiz_0"
+vram_background_writer.v,verilog,xil_defaultlib,../../../gabrielqg/vga-digital-clock/project_Controlador VGA con Reloj Digital.srcs/sources_1/new/vram_background_writer.v,incdir="../../../project_ControladorVGAconRelojDigital.gen/sources_1/ip/clk_wiz_0"
+vram_dual_port.v,verilog,xil_defaultlib,../../../gabrielqg/vga-digital-clock/project_Controlador VGA con Reloj Digital.srcs/sources_1/new/vram_dual_port.v,incdir="../../../project_ControladorVGAconRelojDigital.gen/sources_1/ip/clk_wiz_0"
+top_clock_vga.v,verilog,xil_defaultlib,../../../gabrielqg/vga-digital-clock/project_Controlador VGA con Reloj Digital.srcs/sources_1/new/top_clock_vga.v,incdir="../../../project_ControladorVGAconRelojDigital.gen/sources_1/ip/clk_wiz_0"
+glbl.v,Verilog,xil_defaultlib,glbl.v

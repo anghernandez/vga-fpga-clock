@@ -1,0 +1,22 @@
+transcript off
+onbreak {quit -force}
+onerror {quit -force}
+transcript on
+
+vlib work
+vlib activehdl/xil_defaultlib
+
+vmap xil_defaultlib activehdl/xil_defaultlib
+
+vlog -work xil_defaultlib  -v2k5 "+incdir+../../../project_Controlador VGA con Reloj Digital.gen/sources_1/ip/clk_wiz_0" -l xil_defaultlib \
+"../../../project_Controlador VGA con Reloj Digital.srcs/sources_1/new/vga_controller.v" \
+"../../../project_Controlador VGA con Reloj Digital.srcs/sources_1/new/vga_memory_interface.v" \
+"../../../project_Controlador VGA con Reloj Digital.srcs/sources_1/new/vga_timing.v" \
+"../../../project_Controlador VGA con Reloj Digital.srcs/sources_1/new/vram_background_writer.v" \
+"../../../project_Controlador VGA con Reloj Digital.srcs/sources_1/new/vram_dual_port.v" \
+"../../../project_Controlador VGA con Reloj Digital.srcs/sources_1/new/top_clock_vga.v" \
+
+
+vlog -work xil_defaultlib \
+"glbl.v"
+
