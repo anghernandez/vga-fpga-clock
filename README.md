@@ -124,11 +124,10 @@ El sistema utiliza bitmaps almacenados en ROM para representar caracteres y núm
 El paisaje dinámico incluye:
 
 1. Cielo dependiente de la fase del día
-2. Estrellas
-3. Sol y luna
-4. Nubes multicapa
-5. Montañas
-6. Suelo y río
+2. Sol y luna
+3. Nubes multicapa
+4. Montañas
+5. Suelo y río
 
 ---
 
@@ -158,7 +157,6 @@ El testbench valida:
 
 - Reset
 - Conteo normal
-- Rollovers
 - Ajustes por botones
 - Formato 12h / 24h
 
@@ -167,14 +165,14 @@ El testbench valida:
 # Estructura del repositorio
 
 ```text
-Proyecto_Digitales/
-├── src/
+vga-fpga-clock/
+├── contraints/
 ├── sim/
-├── constraints/
-├── scripts/
-├── docs/
-├── test_Mila/
-└── README.md
+├── src/
+├── .gitnore
+├── README.md
+└── vga-fpga-clock.xpr
+
 ```
 
 ---
