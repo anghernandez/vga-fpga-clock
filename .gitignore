@@ -1,20 +1,20 @@
-# Vivado basura corporativa
+# Vivado generated files
 *.jou
 *.log
 *.str
-*.cache
-*.hw
-*.ip_user_files
-*.runs
-*.sim
-*.Xil
-*.gen
-*.srcs
-*.sdk
-*.tmp
-*.wdb
-*.wcfg
 
-# OS
-.DS_Store
+.Xil/
+*.cache/
+*.hw/
+*.sim/
+*.runs/
+*.gen/
+*.ip_user_files/
 
+vga-fpga-clock.srcs/utils_1/
+
+# VSCode
+.vscode/
+
+# Linux temp
+*~

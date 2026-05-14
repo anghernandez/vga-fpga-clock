@@ -1,3 +1,4 @@
+
 # Controlador VGA con Reloj Digital
 
 **Curso:** Taller de Diseño Digital (EL3313) — TEC, I Semestre 2026  
@@ -5,9 +6,19 @@
 **Profesor:** Luis G. León-Vega, Ph.D  
 **Tarjeta:** Nexys A7-100T (Xilinx Artix-7, xc7a100tcsg324-1)
 
+# Proyecto 1 — Controlador VGA con Reloj Digital
+
+**Curso:** Taller de Diseño Digital (EL3313) — TEC, I Semestre 2026  
+
+**Integrantes:** Milagro Rojas Sánchez · Angie Hernández Mairena · Brayan Solís Rojas  
+
+**Profesor:** Luis G. León-Vega, Ph.D
+
+
 ---
 
 ## Descripción
+
 
 Diseño e implementación de un sistema digital en FPGA que visualiza un reloj HH:MM:SS en tiempo real sobre una pantalla VGA (640×480 @ 60 Hz). El usuario puede ajustar la hora y seleccionar entre formato 12h y 24h mediante los switches y botones de la tarjeta. El fondo de pantalla es un paisaje dinámico que cambia según la fase del día (madrugada, día, tarde, noche).
 
@@ -24,11 +35,15 @@ Diseño e implementación de un sistema digital en FPGA que visualiza un reloj H
 | Integración del sistema | ✅ Completo |
 | Simulación y testbench | ✅ Completo |
 
+Sistema digital implementado en FPGA Nexys A7 que visualiza un reloj HH:MM:SS en una pantalla VGA (640×480 @ 60 Hz). El usuario puede ajustar la hora mediante switches y botones de la tarjeta, y seleccionar entre formato 12h y 24h.
+
+
 ---
 
 ## Arquitectura del sistema
 
 ```
+
 CLK100MHZ → (clocking Wizard) → 25 MHz
                       │
                       ├── vga_controller ──────────→ VGA_HS / VGA_VS / RGB
@@ -64,6 +79,21 @@ CLK100MHZ → (clocking Wizard) → 25 MHz
 
 ---
 
+CLK100MHZ → (÷4) → 25 MHz
+                      │
+                      ├── vga_controller ──→ VGA_HS / VGA_VS / RGB
+                      │        │ lee
+                      │   vram_dual_port (BRAM 640×480 × 8 bits)
+                      │        ↑ escribe
+                      ├── vram_background_writer ← hour_disp, minute, second, am_pm, fmt_sel, tick_1hz
+                      │
+                      ├── clock_controller ← SW[1:0], btn_inc, btn_dec
+                      │
+                      └── debounce × 2 ← BTNU, BTND
+```
+
+
+
 ## Interfaz de usuario
 
 | Control | Función |
@@ -75,6 +105,7 @@ CLK100MHZ → (clocking Wizard) → 25 MHz
 | `BTND` | Decrementa el campo seleccionado |
 
 ---
+
 
 ## Visualización en pantalla
 
@@ -93,7 +124,6 @@ El fondo (`bg_color`) renderiza, en orden de prioridad:
 6. Suelo con hierba, patrón de baldosas y río con destellos
 
 ---
-
 ## Simulación
 
 ```bash
@@ -111,6 +141,7 @@ El testbench instancia `clock_controller` con `TICK_MAX=9` para acelerar la simu
 ```
 Proyecto_Digitales/
 ├── src/                         # Fuentes RTL (todos los módulos documentados con //!)
+├── src/                    # Fuentes RTL
 │   ├── top_clock_vga.v
 │   ├── clock_controller.v
 │   ├── debounce.v
@@ -121,6 +152,7 @@ Proyecto_Digitales/
 │   ├── vram_background_writer.v
 │   ├── bg_color.v
 │   └── digit_rom.v
+│   └── vram_background_writer.v
 ├── sim/
 │   └── tb_clock_controller.v
 ├── constraints/
@@ -140,3 +172,7 @@ Proyecto_Digitales/
 La documentación técnica autogenerada se encuentra en la rama [`docs/autogenerada`](../../tree/docs/autogenerada).
 
 Incluye la descripción de cada módulo, tabla de puertos y parámetros, extraída de los comentarios `//!` TerosHDL presentes en todos los archivos fuente.
+
+└── README.md
+```
+
