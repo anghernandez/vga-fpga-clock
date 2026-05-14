@@ -1,15 +1,13 @@
+# Vivado generated files
 *.jou
 *.log
 *.str
-*.tmp
-*.backup
 
-.cache/
-.hw/
-.ip_user_files/
-.runs/
-.sim/
-.gen/
-
-*.dcp
-*.bit
+.Xil/
+*.cache/
+*.hw/
+*.sim/
+*.runs/
+*.gen/
+*.ip_user_files/
+vga-fpga-clock.srcs/utils_1/
