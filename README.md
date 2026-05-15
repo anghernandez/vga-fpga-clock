@@ -12,6 +12,3 @@ La documentación se generó a partir de los comentarios `//!` (formato TerosHDL
 
 Descarga `docs/index.html` y ábrelo directamente en el navegador.
 
----
-
-Para el código fuente del proyecto, ver la rama [`main`](../../tree/main).
