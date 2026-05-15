@@ -1,0 +1,1736 @@
+
+<style>
+.hljs {
+  color: #383a42;
+  background: #fafafa;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #a0a1a7;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #a626a4;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e45649;
+}
+
+.hljs-literal {
+  color: #0184bb;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #50a14f;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #986801;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #4078f2;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #c18401;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+.markdown-body .octicon {
+  display: inline-block;
+  fill: currentColor;
+  vertical-align: text-bottom;
+}
+
+#descriptions{
+  margin-left:5.5%;
+  margin-right:3%;
+}
+
+.markdown-body .anchor {
+  float: left;
+  line-height: 1;
+  margin-left: -20px;
+  padding-right: 4px;
+}
+
+.markdown-body .anchor:focus {
+  outline: none;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+  color: #1b1f23;
+  vertical-align: middle;
+  visibility: hidden;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+  text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+
+.markdown-body h1:hover .anchor .octicon-link:before,
+.markdown-body h2:hover .anchor .octicon-link:before,
+.markdown-body h3:hover .anchor .octicon-link:before,
+.markdown-body h4:hover .anchor .octicon-link:before,
+.markdown-body h5:hover .anchor .octicon-link:before,
+.markdown-body h6:hover .anchor .octicon-link:before {
+  width: 16px;
+  height: 16px;
+  content: ' ';
+  display: inline-block;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill-rule='evenodd' d='M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z'%3E%3C/path%3E%3C/svg%3E");
+}.markdown-body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
+  color: #24292e;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.markdown-body details {
+  display: block;
+}
+
+.markdown-body summary {
+  display: list-item;
+}
+
+.markdown-body a {
+  background-color: initial;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline-width: 0;
+}
+
+.markdown-body strong {
+  font-weight: inherit;
+  font-weight: bolder;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: .67em 0;
+}
+
+.markdown-body img {
+  border-style: none;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre {
+  font-family: monospace,monospace;
+  font-size: 1em;
+}
+
+.markdown-body hr {
+  box-sizing: initial;
+  height: 0;
+  overflow: visible;
+}
+
+.markdown-body input {
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body input {
+  overflow: visible;
+}
+
+.markdown-body [type=checkbox] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body * {
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.markdown-body a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.markdown-body strong {
+  font-weight: 600;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #dfe2e5;
+}
+
+.markdown-body hr:after,
+.markdown-body hr:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body hr:after {
+  clear: both;
+}
+
+.markdown-body table {
+  width:100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body th {
+    background-color: #ffd78c;
+}
+
+.markdown-body details summary {
+  cursor: pointer;
+}
+
+.markdown-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #d1d5da;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body h1 {
+  font-size: 32px;
+}
+
+.markdown-body h1,
+.markdown-body h2 {
+  font-weight: 600;
+}
+
+.markdown-body h2 {
+  font-size: 24px;
+}
+
+.markdown-body h3 {
+  font-size: 20px;
+}
+
+.markdown-body h3,
+.markdown-body h4 {
+  font-weight: 600;
+}
+
+.markdown-body h4 {
+  font-size: 16px;
+}
+
+.markdown-body h5 {
+  font-size: 14px;
+}
+
+.markdown-body h5,
+.markdown-body h6 {
+  font-weight: 600;
+}
+
+.markdown-body h6 {
+  font-size: 12px;
+}
+
+.markdown-body p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ol,
+.markdown-body ul {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ol ol ol,
+.markdown-body ol ul ol,
+.markdown-body ul ol ol,
+.markdown-body ul ul ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code,
+.markdown-body pre {
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body input::-webkit-inner-spin-button,
+.markdown-body input::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.markdown-body :checked+.radio-label {
+  position: relative;
+  z-index: 1;
+  border-color: #0366d6;
+}
+
+.markdown-body .border {
+  border: 1px solid #e1e4e8!important;
+}
+
+.markdown-body .border-0 {
+  border: 0!important;
+}
+
+.markdown-body .border-bottom {
+  border-bottom: 1px solid #e1e4e8!important;
+}
+
+.markdown-body .rounded-1 {
+  border-radius: 3px!important;
+}
+
+.markdown-body .bg-white {
+  background-color: #fff!important;
+}
+
+.markdown-body .bg-gray-light {
+  background-color: #fafbfc!important;
+}
+
+.markdown-body .text-gray-light {
+  color: #6a737d!important;
+}
+
+.markdown-body .mb-0 {
+  margin-bottom: 0!important;
+}
+
+.markdown-body .my-2 {
+  margin-top: 8px!important;
+  margin-bottom: 8px!important;
+}
+
+.markdown-body .pl-0 {
+  padding-left: 0!important;
+}
+
+.markdown-body .py-0 {
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+}
+
+.markdown-body .pl-1 {
+  padding-left: 4px!important;
+}
+
+.markdown-body .pl-2 {
+  padding-left: 8px!important;
+}
+
+.markdown-body .py-2 {
+  padding-top: 8px!important;
+  padding-bottom: 8px!important;
+}
+
+.markdown-body .pl-3,
+.markdown-body .px-3 {
+  padding-left: 16px!important;
+}
+
+.markdown-body .px-3 {
+  padding-right: 16px!important;
+}
+
+.markdown-body .pl-4 {
+  padding-left: 24px!important;
+}
+
+.markdown-body .pl-5 {
+  padding-left: 32px!important;
+}
+
+.markdown-body .pl-6 {
+  padding-left: 40px!important;
+}
+
+.markdown-body .f6 {
+  font-size: 12px!important;
+}
+
+.markdown-body .lh-condensed {
+  line-height: 1.25!important;
+}
+
+.markdown-body .text-bold {
+  font-weight: 600!important;
+}
+
+.markdown-body .pl-c {
+  color: #6a737d;
+}
+
+.markdown-body .pl-c1,
+.markdown-body .pl-s .pl-v {
+  color: #005cc5;
+}
+
+.markdown-body .pl-e,
+.markdown-body .pl-en {
+  color: #6f42c1;
+}
+
+.markdown-body .pl-s .pl-s1,
+.markdown-body .pl-smi {
+  color: #24292e;
+}
+
+.markdown-body .pl-ent {
+  color: #22863a;
+}
+
+.markdown-body .pl-k {
+  color: #d73a49;
+}
+
+.markdown-body .pl-pds,
+.markdown-body .pl-s,
+.markdown-body .pl-s .pl-pse .pl-s1,
+.markdown-body .pl-sr,
+.markdown-body .pl-sr .pl-cce,
+.markdown-body .pl-sr .pl-sra,
+.markdown-body .pl-sr .pl-sre {
+  color: #032f62;
+}
+
+.markdown-body .pl-smw,
+.markdown-body .pl-v {
+  color: #e36209;
+}
+
+.markdown-body .pl-bu {
+  color: #b31d28;
+}
+
+.markdown-body .pl-ii {
+  color: #fafbfc;
+  background-color: #b31d28;
+}
+
+.markdown-body .pl-c2 {
+  color: #fafbfc;
+  background-color: #d73a49;
+}
+
+.markdown-body .pl-c2:before {
+  content: "^M";
+}
+
+.markdown-body .pl-sr .pl-cce {
+  font-weight: 700;
+  color: #22863a;
+}
+
+.markdown-body .pl-ml {
+  color: #735c0f;
+}
+
+.markdown-body .pl-mh,
+.markdown-body .pl-mh .pl-en,
+.markdown-body .pl-ms {
+  font-weight: 700;
+  color: #005cc5;
+}
+
+.markdown-body .pl-mi {
+  font-style: italic;
+  color: #24292e;
+}
+
+.markdown-body .pl-mb {
+  font-weight: 700;
+  color: #24292e;
+}
+
+.markdown-body .pl-md {
+  color: #b31d28;
+  background-color: #ffeef0;
+}
+
+.markdown-body .pl-mi1 {
+  color: #22863a;
+  background-color: #f0fff4;
+}
+
+.markdown-body .pl-mc {
+  color: #e36209;
+  background-color: #ffebda;
+}
+
+.markdown-body .pl-mi2 {
+  color: #f6f8fa;
+  background-color: #005cc5;
+}
+
+.markdown-body .pl-mdr {
+  font-weight: 700;
+  color: #6f42c1;
+}
+
+.markdown-body .pl-ba {
+  color: #586069;
+}
+
+.markdown-body .pl-sg {
+  color: #959da5;
+}
+
+.markdown-body .pl-corl {
+  text-decoration: underline;
+  color: #032f62;
+}
+
+.markdown-body .mb-0 {
+  margin-bottom: 0!important;
+}
+
+.markdown-body .my-2 {
+  margin-bottom: 8px!important;
+}
+
+.markdown-body .my-2 {
+  margin-top: 8px!important;
+}
+
+.markdown-body .pl-0 {
+  padding-left: 0!important;
+}
+
+.markdown-body .py-0 {
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+}
+
+.markdown-body .pl-1 {
+  padding-left: 4px!important;
+}
+
+.markdown-body .pl-2 {
+  padding-left: 8px!important;
+}
+
+.markdown-body .py-2 {
+  padding-top: 8px!important;
+  padding-bottom: 8px!important;
+}
+
+.markdown-body .pl-3 {
+  padding-left: 16px!important;
+}
+
+.markdown-body .pl-4 {
+  padding-left: 24px!important;
+}
+
+.markdown-body .pl-5 {
+  padding-left: 32px!important;
+}
+
+.markdown-body .pl-6 {
+  padding-left: 40px!important;
+}
+
+.markdown-body .pl-7 {
+  padding-left: 48px!important;
+}
+
+.markdown-body .pl-8 {
+  padding-left: 64px!important;
+}
+
+.markdown-body .pl-9 {
+  padding-left: 80px!important;
+}
+
+.markdown-body .pl-10 {
+  padding-left: 96px!important;
+}
+
+.markdown-body .pl-11 {
+  padding-left: 112px!important;
+}
+
+.markdown-body .pl-12 {
+  padding-left: 128px!important;
+}
+
+.markdown-body hr {
+  border-bottom-color: #eee;
+}
+
+.markdown-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #d1d5da;
+}
+
+.markdown-body:after,
+.markdown-body:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body:after {
+  clear: both;
+}
+
+.markdown-body>:first-child {
+  margin-top: 0!important;
+}
+
+.markdown-body>:last-child {
+  margin-bottom: 0!important;
+}
+
+.markdown-body a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.markdown-body blockquote,
+.markdown-body details,
+.markdown-body dl,
+.markdown-body ol,
+.markdown-body p,
+.markdown-body pre,
+.markdown-body table,
+.markdown-body ul {
+  width:100%;
+
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: .25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #e1e4e8;
+  border: 0;
+}
+
+.markdown-body blockquote {
+  padding: 0 1em;
+  color: #6a737d;
+  border-left: .25em solid #dfe2e5;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+}
+
+.markdown-body h1,
+.markdown-body h2 {
+  padding-bottom: .3em;
+  border-bottom: 1px solid #eaecef;
+}
+
+.markdown-body h2 {
+  font-size: 1.5em;
+}
+
+.markdown-body h3 {
+  font-size: 1.25em;
+}
+
+.markdown-body h4 {
+  font-size: 1em;
+}
+
+.markdown-body h5 {
+  font-size: .875em;
+}
+
+.markdown-body h6 {
+  font-size: .85em;
+  color: #6a737d;
+}
+
+.markdown-body ol,
+.markdown-body ul {
+  padding-left: 2em;
+}
+
+.markdown-body ol ol,
+.markdown-body ol ul,
+.markdown-body ul ol,
+.markdown-body ul ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li {
+  word-wrap: break-all;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body li+li {
+  margin-top: .25em;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body table {
+  width: 100%;
+}
+
+.markdown-body table th {
+  font-weight: 600;
+}
+
+.markdown-body table td,
+.markdown-body table th {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  box-sizing: initial;
+  background-color: #fff;
+}
+
+.markdown-body img[align=right] {
+  padding-left: 20px;
+}
+
+.markdown-body img[align=left] {
+  padding-right: 20px;
+}
+
+.markdown-body code {
+  padding: .2em .4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .highlight {
+  margin-bottom: 16px;
+}
+
+.markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  border-radius: 3px;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: initial;
+  border: 0;
+}
+
+.markdown-body .commit-tease-sha {
+  display: inline-block;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  font-size: 90%;
+  color: #444d56;
+}
+
+.markdown-body .full-commit .btn-outline:not(:disabled):hover {
+  color: #005cc5;
+  border-color: #005cc5;
+}
+
+.markdown-body .blob-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.markdown-body .blob-wrapper-embedded {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.markdown-body .blob-num {
+  width: 1%;
+  min-width: 50px;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  font-size: 12px;
+  line-height: 20px;
+  color: rgba(27,31,35,.3);
+  text-align: right;
+  white-space: nowrap;
+  vertical-align: top;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.markdown-body .blob-num:hover {
+  color: rgba(27,31,35,.6);
+}
+
+.markdown-body .blob-num:before {
+  content: attr(data-line-number);
+}
+
+.markdown-body .blob-code {
+  position: relative;
+  padding-right: 10px;
+  padding-left: 10px;
+  line-height: 20px;
+  vertical-align: top;
+}
+
+.markdown-body .blob-code-inner {
+  overflow: visible;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  font-size: 12px;
+  color: #24292e;
+  word-wrap: normal;
+  white-space: pre;
+}
+
+.markdown-body .pl-token.active,
+.markdown-body .pl-token:hover {
+  cursor: pointer;
+  background: #ffea7f;
+}
+
+.markdown-body .tab-size[data-tab-size="1"] {
+  -moz-tab-size: 1;
+  tab-size: 1;
+}
+
+.markdown-body .tab-size[data-tab-size="2"] {
+  -moz-tab-size: 2;
+  tab-size: 2;
+}
+
+.markdown-body .tab-size[data-tab-size="3"] {
+  -moz-tab-size: 3;
+  tab-size: 3;
+}
+
+.markdown-body .tab-size[data-tab-size="4"] {
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+
+.markdown-body .tab-size[data-tab-size="5"] {
+  -moz-tab-size: 5;
+  tab-size: 5;
+}
+
+.markdown-body .tab-size[data-tab-size="6"] {
+  -moz-tab-size: 6;
+  tab-size: 6;
+}
+
+.markdown-body .tab-size[data-tab-size="7"] {
+  -moz-tab-size: 7;
+  tab-size: 7;
+}
+
+.markdown-body .tab-size[data-tab-size="8"] {
+  -moz-tab-size: 8;
+  tab-size: 8;
+}
+
+.markdown-body .tab-size[data-tab-size="9"] {
+  -moz-tab-size: 9;
+  tab-size: 9;
+}
+
+.markdown-body .tab-size[data-tab-size="10"] {
+  -moz-tab-size: 10;
+  tab-size: 10;
+}
+
+.markdown-body .tab-size[data-tab-size="11"] {
+  -moz-tab-size: 11;
+  tab-size: 11;
+}
+
+.markdown-body .tab-size[data-tab-size="12"] {
+  -moz-tab-size: 12;
+  tab-size: 12;
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 .2em .25em -1.6em;
+  vertical-align: middle;
+}
+.markdown-body .description {
+  margin: 0 .2em .25em -1.6em;
+  vertical-align: middle;
+}
+
+</style>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>TerosHDL</title>
+  <style>
+    body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+  </style>
+  </head>
+  <body>
+  <article class="markdown-body">
+
+<div id="teroshdl" class='templateTerosHDL'>
+<h1 id="entity-vram_background_writer">Entity: vram_background_writer</h1><ul>
+<li><strong>File</strong>: vram_background_writer.v</li>
+</ul><ul>
+<li><strong>Title:</strong>  Escritor de Fondo VRAM</li>
+<li><strong>Author:</strong>  Brayan Solís y Milagro Rojas Sánchez</li>
+</ul><h2 id="diagram">Diagram</h2><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" viewBox="0 0 535 230"><svg id="SvgjsSvg1002" width="2" height="0" focusable="false" style="overflow:hidden;top:-100%;left:-100%;position:absolute;opacity:0"><polyline id="SvgjsPolyline1003" points="145,0 160,0"></polyline><path id="SvgjsPath1004" d="M0 0 "></path></svg><rect id="SvgjsRect1006" width="270" height="210" fill="black" x="160" y="15"></rect><rect id="SvgjsRect1007" width="266" height="205" fill="#fdfd96" x="162" y="17"></rect><text id="SvgjsText1008" font-family="Helvetica" x="140" y="9.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1009" dy="26" x="140" svgjs:data="{&quot;newLined&quot;:true}">   wire </tspan></text><text id="SvgjsText1010" font-family="Helvetica" x="175" y="9.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1011" dy="26" x="175" svgjs:data="{&quot;newLined&quot;:true}">   clk </tspan></text><line id="SvgjsLine1012" x1="145" y1="30" x2="160" y2="30" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1013" font-family="Helvetica" x="140" y="29.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1014" dy="26" x="140" svgjs:data="{&quot;newLined&quot;:true}">   wire </tspan></text><text id="SvgjsText1015" font-family="Helvetica" x="175" y="29.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1016" dy="26" x="175" svgjs:data="{&quot;newLined&quot;:true}">   reset </tspan></text><line id="SvgjsLine1017" x1="145" y1="50" x2="160" y2="50" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1018" font-family="Helvetica" x="140" y="49.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1019" dy="26" x="140" svgjs:data="{&quot;newLined&quot;:true}">   wire [4:0] </tspan></text><text id="SvgjsText1020" font-family="Helvetica" x="175" y="49.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1021" dy="26" x="175" svgjs:data="{&quot;newLined&quot;:true}">   hour_disp </tspan></text><line id="SvgjsLine1022" x1="145" y1="70" x2="160" y2="70" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1023" font-family="Helvetica" x="140" y="69.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1024" dy="26" x="140" svgjs:data="{&quot;newLined&quot;:true}">   wire [5:0] </tspan></text><text id="SvgjsText1025" font-family="Helvetica" x="175" y="69.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1026" dy="26" x="175" svgjs:data="{&quot;newLined&quot;:true}">   minute </tspan></text><line id="SvgjsLine1027" x1="145" y1="90" x2="160" y2="90" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1028" font-family="Helvetica" x="140" y="89.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1029" dy="26" x="140" svgjs:data="{&quot;newLined&quot;:true}">   wire [5:0] </tspan></text><text id="SvgjsText1030" font-family="Helvetica" x="175" y="89.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1031" dy="26" x="175" svgjs:data="{&quot;newLined&quot;:true}">   second </tspan></text><line id="SvgjsLine1032" x1="145" y1="110" x2="160" y2="110" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1033" font-family="Helvetica" x="140" y="109.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1034" dy="26" x="140" svgjs:data="{&quot;newLined&quot;:true}">   wire </tspan></text><text id="SvgjsText1035" font-family="Helvetica" x="175" y="109.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1036" dy="26" x="175" svgjs:data="{&quot;newLined&quot;:true}">   am_pm </tspan></text><line id="SvgjsLine1037" x1="145" y1="130" x2="160" y2="130" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1038" font-family="Helvetica" x="140" y="129.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1039" dy="26" x="140" svgjs:data="{&quot;newLined&quot;:true}">   wire </tspan></text><text id="SvgjsText1040" font-family="Helvetica" x="175" y="129.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1041" dy="26" x="175" svgjs:data="{&quot;newLined&quot;:true}">   fmt_sel </tspan></text><line id="SvgjsLine1042" x1="145" y1="150" x2="160" y2="150" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1043" font-family="Helvetica" x="140" y="149.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1044" dy="26" x="140" svgjs:data="{&quot;newLined&quot;:true}">   wire </tspan></text><text id="SvgjsText1045" font-family="Helvetica" x="175" y="149.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1046" dy="26" x="175" svgjs:data="{&quot;newLined&quot;:true}">   tick_1hz </tspan></text><line id="SvgjsLine1047" x1="145" y1="170" x2="160" y2="170" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1048" font-family="Helvetica" x="140" y="169.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1049" dy="26" x="140" svgjs:data="{&quot;newLined&quot;:true}">   wire [1:0] </tspan></text><text id="SvgjsText1050" font-family="Helvetica" x="175" y="169.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1051" dy="26" x="175" svgjs:data="{&quot;newLined&quot;:true}">   phase </tspan></text><line id="SvgjsLine1052" x1="145" y1="190" x2="160" y2="190" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1053" font-family="Helvetica" x="140" y="189.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1054" dy="26" x="140" svgjs:data="{&quot;newLined&quot;:true}">   wire [9:0] </tspan></text><text id="SvgjsText1055" font-family="Helvetica" x="175" y="189.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1056" dy="26" x="175" svgjs:data="{&quot;newLined&quot;:true}">   astro_cy </tspan></text><line id="SvgjsLine1057" x1="145" y1="210" x2="160" y2="210" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1058" font-family="Helvetica" x="450" y="9.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1059" dy="26" x="450" svgjs:data="{&quot;newLined&quot;:true}">    </tspan></text><text id="SvgjsText1060" font-family="Helvetica" x="415" y="9.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1061" dy="26" x="415" svgjs:data="{&quot;newLined&quot;:true}">   we </tspan></text><line id="SvgjsLine1062" x1="430" y1="30" x2="445" y2="30" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1063" font-family="Helvetica" x="450" y="29.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1064" dy="26" x="450" svgjs:data="{&quot;newLined&quot;:true}">   [18:0] </tspan></text><text id="SvgjsText1065" font-family="Helvetica" x="415" y="29.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1066" dy="26" x="415" svgjs:data="{&quot;newLined&quot;:true}">   addr_write </tspan></text><line id="SvgjsLine1067" x1="430" y1="50" x2="445" y2="50" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1068" font-family="Helvetica" x="450" y="49.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1069" dy="26" x="450" svgjs:data="{&quot;newLined&quot;:true}">   [7:0] </tspan></text><text id="SvgjsText1070" font-family="Helvetica" x="415" y="49.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1071" dy="26" x="415" svgjs:data="{&quot;newLined&quot;:true}">   data_in </tspan></text><line id="SvgjsLine1072" x1="430" y1="70" x2="445" y2="70" stroke-linecap="rec" stroke="black" stroke-width="5"></line></svg>
+<h2 id="description">Description</h2><p>Generador de imagen para el reloj digital VGA 640×480.  Escribe directamente en la VRAM de doble puerto el fondo dinámico  (calculado por <code>bg_color</code>), los dos puntos separadores y los dígitos/letras  de la hora escalados a partir de bitmaps de <code>digit_rom</code>.</p> <p>La renderización sigue una <strong>FSM de 6 estados</strong>:</p> <ul> <li><strong>ST_INIT</strong> — barre los 307 200 píxeles y escribe el fondo completo.</li> <li><strong>ST_COLON</strong> — pinta los dos caracteres <code>:</code> separadores (HH:MM:SS).</li> <li><strong>ST_IDLE</strong> — espera <code>tick_1hz</code>, cambio de tiempo o cambio de fase.</li> <li><strong>ST_LOAD_SLOT</strong> — carga posición, tamaño y escala del slot activo (0–7).</li> <li><strong>ST_RENDER_PIX</strong> — escribe cada píxel del slot: blanco si el bit ROM es 1, fondo si es 0.</li> <li><strong>ST_NEXT_SLOT</strong> — avanza al siguiente slot o regresa a ST_IDLE al terminar los 8.</li> </ul> <p><code>bg_color</code> se instancia internamente; sus entradas x/y se multiplexan entre  <code>(init_x, init_y)</code> en ST_INIT y <code>(slot_x0+px, slot_y0+py)</code> en ST_RENDER_PIX.</p><h2 id="ports">Ports</h2>
+<table>
+<thead>
+<tr>
+<th id="port_name">Port name</th>
+<th id="direction">Direction</th>
+<th id="type">Type</th>
+<th id="description">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clk</td>
+<td>input</td>
+<td>wire</td>
+<td>Reloj del sistema (25 MHz)</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>input</td>
+<td>wire</td>
+<td>Reset síncrono, activo en alto</td>
+</tr>
+<tr>
+<td>we</td>
+<td>output</td>
+<td></td>
+<td>Habilitación de escritura en VRAM (activo en alto)</td>
+</tr>
+<tr>
+<td>addr_write</td>
+<td>output</td>
+<td>[18:0]</td>
+<td>Dirección VRAM destino: píxel = y×640 + x</td>
+</tr>
+<tr>
+<td>data_in</td>
+<td>output</td>
+<td>[7:0]</td>
+<td>Dato RGB332 a escribir en VRAM</td>
+</tr>
+<tr>
+<td>hour_disp</td>
+<td>input</td>
+<td>wire [4:0]</td>
+<td>Hora a mostrar en formato display (1–12 o 0–23)</td>
+</tr>
+<tr>
+<td>minute</td>
+<td>input</td>
+<td>wire [5:0]</td>
+<td>Minutos actuales (0–59)</td>
+</tr>
+<tr>
+<td>second</td>
+<td>input</td>
+<td>wire [5:0]</td>
+<td>Segundos actuales (0–59)</td>
+</tr>
+<tr>
+<td>am_pm</td>
+<td>input</td>
+<td>wire</td>
+<td>Indicador 12h: 0=AM, 1=PM</td>
+</tr>
+<tr>
+<td>fmt_sel</td>
+<td>input</td>
+<td>wire</td>
+<td>Selección de formato: 0=24h, 1=12h</td>
+</tr>
+<tr>
+<td>tick_1hz</td>
+<td>input</td>
+<td>wire</td>
+<td>Pulso de 1 ciclo por segundo (dispara refresco)</td>
+</tr>
+<tr>
+<td>phase</td>
+<td>input</td>
+<td>wire [1:0]</td>
+<td>Fase del día: 00=madrugada, 01=día, 10=tarde, 11=noche</td>
+</tr>
+<tr>
+<td>astro_cy</td>
+<td>input</td>
+<td>wire [9:0]</td>
+<td>Posición Y del astro (sol/luna) para bg_color</td>
+</tr>
+</tbody>
+</table><h2 id="signals">Signals</h2>
+<table>
+<thead>
+<tr>
+<th id="name">Name</th>
+<th id="type">Type</th>
+<th id="description">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>state</td>
+<td>reg [2:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>init_x</td>
+<td>reg [9:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>init_y</td>
+<td>reg [9:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>colon_idx</td>
+<td>reg</td>
+<td></td>
+</tr>
+<tr>
+<td>col_x</td>
+<td>reg [2:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>col_y</td>
+<td>reg [7:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>slot_idx</td>
+<td>reg [2:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>px</td>
+<td>reg [6:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>py</td>
+<td>reg [7:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>slot_x0</td>
+<td>reg [9:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>slot_y0</td>
+<td>reg [9:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>slot_w</td>
+<td>reg [6:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>slot_h</td>
+<td>reg [7:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>slot_scale</td>
+<td>reg [3:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>slot_digit</td>
+<td>reg [3:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>phase_prev</td>
+<td>reg [2:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>in_render = (state == ST_RENDER_PIX)</td>
+<td>wire</td>
+<td></td>
+</tr>
+<tr>
+<td>in_colon  = (state == ST_COLON)</td>
+<td>wire</td>
+<td></td>
+</tr>
+<tr>
+<td>bg_x = in_render ? (slot_x</td>
+<td>wire [9:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>bg_y = in_render ? (slot_y</td>
+<td>wire [9:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>bg_pixel</td>
+<td>wire [7:0]</td>
+<td>Color de fondo calculado por bg_color para la coordenada activa</td>
+</tr>
+<tr>
+<td>rom_digit_sel</td>
+<td>reg  [3:0]</td>
+<td>Selector de carácter enviado a la ROM</td>
+</tr>
+<tr>
+<td>rom_row</td>
+<td>reg  [3:0]</td>
+<td>Fila del bitmap (calculada desde py y slot_scale)</td>
+</tr>
+<tr>
+<td>rom_row_data</td>
+<td>wire [7:0]</td>
+<td>Byte de la fila devuelto por la ROM</td>
+</tr>
+<tr>
+<td>col_bmp</td>
+<td>reg [2:0]</td>
+<td>Columna del bitmap tras aplicar la escala a px</td>
+</tr>
+<tr>
+<td>pixel_on</td>
+<td>reg</td>
+<td>1 si el píxel pertenece al trazo del carácter</td>
+</tr>
+<tr>
+<td>h_tens</td>
+<td>reg [3:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>h_units</td>
+<td>reg [3:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>m_tens</td>
+<td>reg [3:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>m_units</td>
+<td>reg [3:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>s_tens</td>
+<td>reg [3:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>s_units</td>
+<td>reg [3:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>fmt_c1 = (!fmt_sel) ? 4'd14 : (!am_pm) ? 4'd10 : 4'd12</td>
+<td>wire [3:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>fmt_c2 = (!fmt_sel) ? 4'd15 : 4'd11</td>
+<td>wire [3:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>digit_of_slot</td>
+<td>reg [3:0]</td>
+<td>Código de carácter del slot actual (0–15 según digit_rom)</td>
+</tr>
+<tr>
+<td>hour_prev</td>
+<td>reg [4:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>minute_prev</td>
+<td>reg [5:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>fmt_prev</td>
+<td>reg</td>
+<td></td>
+</tr>
+<tr>
+<td>am_pm_prev</td>
+<td>reg</td>
+<td></td>
+</tr>
+<tr>
+<td>time_changed = (hour_disp != hour_prev)</td>
+<td>wire</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="constants">Constants</h2>
+<table>
+<thead>
+<tr>
+<th id="name">Name</th>
+<th id="type">Type</th>
+<th id="value">Value</th>
+<th id="description">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SCR_W</td>
+<td></td>
+<td>640</td>
+<td></td>
+</tr>
+<tr>
+<td>SCR_H</td>
+<td></td>
+<td>480</td>
+<td></td>
+</tr>
+<tr>
+<td>X_START</td>
+<td></td>
+<td>10'd56</td>
+<td></td>
+</tr>
+<tr>
+<td>Y_START</td>
+<td></td>
+<td>10'd176</td>
+<td></td>
+</tr>
+<tr>
+<td>DIG_W</td>
+<td></td>
+<td>7'd64</td>
+<td></td>
+</tr>
+<tr>
+<td>DIG_H</td>
+<td></td>
+<td>8'd128</td>
+<td></td>
+</tr>
+<tr>
+<td>FMT_W</td>
+<td></td>
+<td>6'd32</td>
+<td></td>
+</tr>
+<tr>
+<td>FMT_H</td>
+<td></td>
+<td>7'd64</td>
+<td></td>
+</tr>
+<tr>
+<td>FMT_Y</td>
+<td></td>
+<td>10'd208</td>
+<td></td>
+</tr>
+<tr>
+<td>X_S0</td>
+<td></td>
+<td>10'd56</td>
+<td></td>
+</tr>
+<tr>
+<td>X_S1</td>
+<td></td>
+<td>10'd124</td>
+<td></td>
+</tr>
+<tr>
+<td>X_S2</td>
+<td></td>
+<td>10'd216</td>
+<td></td>
+</tr>
+<tr>
+<td>X_S3</td>
+<td></td>
+<td>10'd280</td>
+<td></td>
+</tr>
+<tr>
+<td>X_S4</td>
+<td></td>
+<td>10'd372</td>
+<td></td>
+</tr>
+<tr>
+<td>X_S5</td>
+<td></td>
+<td>10'd436</td>
+<td></td>
+</tr>
+<tr>
+<td>X_S6</td>
+<td></td>
+<td>10'd516</td>
+<td></td>
+</tr>
+<tr>
+<td>X_S7</td>
+<td></td>
+<td>10'd548</td>
+<td></td>
+</tr>
+<tr>
+<td>X_COL0</td>
+<td></td>
+<td>10'd196</td>
+<td></td>
+</tr>
+<tr>
+<td>X_COL1</td>
+<td></td>
+<td>10'd360</td>
+<td></td>
+</tr>
+<tr>
+<td>COL_W</td>
+<td></td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td>COLOR_DIGIT</td>
+<td></td>
+<td>8'hFF</td>
+<td></td>
+</tr>
+<tr>
+<td>COLOR_COLON</td>
+<td></td>
+<td>8'hFF</td>
+<td></td>
+</tr>
+<tr>
+<td>ST_INIT</td>
+<td></td>
+<td>3'd0</td>
+<td></td>
+</tr>
+<tr>
+<td>ST_COLON</td>
+<td></td>
+<td>3'd1</td>
+<td></td>
+</tr>
+<tr>
+<td>ST_IDLE</td>
+<td></td>
+<td>3'd2</td>
+<td></td>
+</tr>
+<tr>
+<td>ST_LOAD_SLOT</td>
+<td></td>
+<td>3'd3</td>
+<td></td>
+</tr>
+<tr>
+<td>ST_RENDER_PIX</td>
+<td></td>
+<td>3'd4</td>
+<td></td>
+</tr>
+<tr>
+<td>ST_NEXT_SLOT</td>
+<td></td>
+<td>3'd5</td>
+<td></td>
+</tr>
+</tbody>
+</table><h2 id="processes">Processes</h2><ul>
+<li>unnamed: ( @(*) )</li>
+</ul><div id="descriptions"><p><strong>Type:</strong> always</p></div><div id="descriptions"><p><strong>Description</strong><br />
+  Escala ×8 → divide py entre 8 (&gt;&gt;3); escala ×4 → divide entre 4 (&gt;&gt;2). </p></div><ul>
+<li>unnamed: ( @(*) )</li>
+</ul><div id="descriptions"><p><strong>Type:</strong> always</p></div><div id="descriptions"><p><strong>Description</strong><br />
+  Escala px igual que py y extrae el bit de la columna del byte ROM (bit[7]=col 0). </p></div><ul>
+<li>unnamed: ( @(*) )</li>
+</ul><div id="descriptions"><p><strong>Type:</strong> always</p></div><div id="descriptions"><p><strong>Description</strong><br />
+  Descomposición de hora, minuto y segundo en decenas y unidades sin usar divisor hardware. </p></div><ul>
+<li>unnamed: ( @(*) )</li>
+</ul><div id="descriptions"><p><strong>Type:</strong> always</p></div><div id="descriptions"><p><strong>Description</strong><br />
+  Slots 0-1=hora, 2-3=minuto, 4-5=segundo, 6=primera letra formato, 7=segunda letra. </p></div><ul>
+<li>unnamed: ( @(posedge clk) )</li>
+</ul><div id="descriptions"><p><strong>Type:</strong> always</p></div><ul>
+<li>unnamed: ( @(posedge clk) )</li>
+</ul><div id="descriptions"><p><strong>Type:</strong> always</p></div><div id="descriptions"><p><strong>Description</strong><br />
+  FSM de renderización de 6 estados. Reacciona a <code>tick_1hz</code>, <code>time_changed</code> y cambios  de <code>phase</code> para iniciar el refresco completo (ST_INIT) o solo los slots de dígitos. </p></div><h2 id="instantiations">Instantiations</h2><ul>
+<li>u_bg_color: bg_color</li>
+</ul><div id="descriptions"><p><strong>Description</strong><br />
+  Calcula el color del paisaje para la coordenada activa (bg_x, bg_y).</p></div><ul>
+<li>rom_inst: digit_rom</li>
+</ul><div id="descriptions"><p><strong>Description</strong><br />
+  ROM de bitmaps 8×16: decodifica el carácter activo y devuelve la fila de píxeles.</p></div><h2 id="statemachines">State machines</h2><div><ul>
+<li>FSM de renderización de 6 estados. Reacciona a <code>tick_1hz</code>, <code>time_changed</code> y cambios
+de <code>phase</code> para iniciar el refresco completo (ST_INIT) o solo los slots de dígitos.</li>
+</ul><div id="state_machine"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: state transitions Pages: 1 -->
+<svg width="543pt" height="564pt"
+ viewBox="0.00 0.00 542.98 564.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 560)">
+<title>state transitions</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-560 538.977,-560 538.977,4 -4,4"/>
+<g id="clust1" class="cluster state regular">
+<title>cluster_state</title>
+<path fill="none" stroke="#000000" stroke-width="2" d="M20,-8C20,-8 352,-8 352,-8 358,-8 364,-14 364,-20 364,-20 364,-536 364,-536 364,-542 358,-548 352,-548 352,-548 20,-548 20,-548 14,-548 8,-542 8,-536 8,-536 8,-20 8,-20 8,-14 14,-8 20,-8"/>
+<text text-anchor="start" x="172.9944" y="-529.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">state</text>
+</g>
+<!-- state -->
+<!-- ST_INIT -->
+<g id="node2" class="node state regular">
+<title>ST_INIT</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="137,-510 71,-510 71,-474 137,-474 137,-510"/>
+<text text-anchor="start" x="81.6662" y="-488.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">ST_INIT</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M83.3333,-475C83.3333,-475 124.6667,-475 124.6667,-475 130.3333,-475 136,-480.6667 136,-486.3333 136,-486.3333 136,-497.6667 136,-497.6667 136,-503.3333 130.3333,-509 124.6667,-509 124.6667,-509 83.3333,-509 83.3333,-509 77.6667,-509 72,-503.3333 72,-497.6667 72,-497.6667 72,-486.3333 72,-486.3333 72,-480.6667 77.6667,-475 83.3333,-475"/>
+</g>
+<!-- ST_COLON -->
+<g id="node3" class="node state regular">
+<title>ST_COLON</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="102,-416 16,-416 16,-380 102,-380 102,-416"/>
+<text text-anchor="start" x="26.6648" y="-394.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">ST_COLON</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M28.3333,-381C28.3333,-381 89.6667,-381 89.6667,-381 95.3333,-381 101,-386.6667 101,-392.3333 101,-392.3333 101,-403.6667 101,-403.6667 101,-409.3333 95.3333,-415 89.6667,-415 89.6667,-415 28.3333,-415 28.3333,-415 22.6667,-415 17,-409.3333 17,-403.6667 17,-403.6667 17,-392.3333 17,-392.3333 17,-386.6667 22.6667,-381 28.3333,-381"/>
+</g>
+<!-- ST_INIT&#45;&gt;ST_COLON -->
+<g id="edge1" class="edge transition">
+<title>ST_INIT&#45;&gt;ST_COLON</title>
+<path fill="none" stroke="#000000" d="M70.9862,-475.337C64.3758,-470.3831 58.3115,-464.2873 54.541,-457 49.7062,-447.6556 49.4538,-436.3443 50.891,-426.1357"/>
+<polygon fill="#000000" stroke="#000000" points="54.3839,-426.5125 52.8791,-416.0251 47.5154,-425.1619 54.3839,-426.5125"/>
+<text text-anchor="start" x="54" y="-448" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">init_y == SCR_H &#45; 1 &#160;&#160;</text>
+<text text-anchor="start" x="54" y="-436" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">init_x == SCR_W &#45; 1 &#160;&#160;</text>
+</g>
+<!-- ST_LOAD_SLOT -->
+<g id="node5" class="node state regular">
+<title>ST_LOAD_SLOT</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="130,-310 16,-310 16,-274 130,-274 130,-310"/>
+<text text-anchor="start" x="26.6572" y="-288.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">ST_LOAD_SLOT</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M28.3333,-275C28.3333,-275 117.6667,-275 117.6667,-275 123.3333,-275 129,-280.6667 129,-286.3333 129,-286.3333 129,-297.6667 129,-297.6667 129,-303.3333 123.3333,-309 117.6667,-309 117.6667,-309 28.3333,-309 28.3333,-309 22.6667,-309 17,-303.3333 17,-297.6667 17,-297.6667 17,-286.3333 17,-286.3333 17,-280.6667 22.6667,-275 28.3333,-275"/>
+</g>
+<!-- ST_COLON&#45;&gt;ST_LOAD_SLOT -->
+<g id="edge2" class="edge transition">
+<title>ST_COLON&#45;&gt;ST_LOAD_SLOT</title>
+<path fill="none" stroke="#000000" d="M55.1642,-379.9412C52.7578,-365.434 50.8371,-344.6421 55.089,-327 55.6907,-324.5033 56.5025,-321.9844 57.4495,-319.5039"/>
+<polygon fill="#000000" stroke="#000000" points="60.6999,-320.8097 61.6145,-310.2544 54.3172,-317.9356 60.6999,-320.8097"/>
+<text text-anchor="start" x="55" y="-354" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">colon_idx == 1&#39;b1 &#160;&#160;</text>
+<text text-anchor="start" x="55" y="-342" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">col_y == 8&#39;d127 &#160;&#160;</text>
+<text text-anchor="start" x="55" y="-330" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">col_x == COL_W &#45; 1 &#160;&#160;</text>
+</g>
+<!-- ST_IDLE -->
+<g id="node4" class="node state regular">
+<title>ST_IDLE</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="250,-52 180,-52 180,-16 250,-16 250,-52"/>
+<text text-anchor="start" x="190.6622" y="-30.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">ST_IDLE</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M192.3333,-17C192.3333,-17 237.6667,-17 237.6667,-17 243.3333,-17 249,-22.6667 249,-28.3333 249,-28.3333 249,-39.6667 249,-39.6667 249,-45.3333 243.3333,-51 237.6667,-51 237.6667,-51 192.3333,-51 192.3333,-51 186.6667,-51 181,-45.3333 181,-39.6667 181,-39.6667 181,-28.3333 181,-28.3333 181,-22.6667 186.6667,-17 192.3333,-17"/>
+</g>
+<!-- ST_IDLE&#45;&gt;ST_INIT -->
+<g id="edge3" class="edge transition">
+<title>ST_IDLE&#45;&gt;ST_INIT</title>
+<path fill="none" stroke="#000000" d="M250.134,-39.693C283.6299,-46.1437 329,-58.0161 329,-75 329,-183.5 329,-183.5 329,-183.5 329,-203.4022 333.2245,-210.3646 324,-228 279.11,-313.8212 160,-274.6476 160,-371.5 160,-445 160,-445 160,-445 160,-455.8839 153.7169,-464.7498 145.3598,-471.7284"/>
+<polygon fill="#000000" stroke="#000000" points="143.2765,-468.9156 137.2227,-477.6105 147.3774,-474.5887 143.2765,-468.9156"/>
+<text text-anchor="start" x="312" y="-248" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">phase != phase_prev || tick_1hz || time_changed &#160;&#160;</text>
+</g>
+<!-- ST_IDLE&#45;&gt;ST_LOAD_SLOT -->
+<g id="edge4" class="edge transition">
+<title>ST_IDLE&#45;&gt;ST_LOAD_SLOT</title>
+<path fill="none" stroke="#000000" d="M179.6068,-35.0806C127.9537,-37.6356 38,-46.2172 38,-75 38,-142.5 38,-142.5 38,-142.5 38,-180.7099 17.6664,-191.5096 29,-228 33.2388,-241.6475 41.5093,-254.9642 49.7468,-265.885"/>
+<polygon fill="#000000" stroke="#000000" points="47.0161,-268.0745 55.9722,-273.7348 52.5007,-263.7249 47.0161,-268.0745"/>
+<text text-anchor="start" x="37" y="-160" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">tick_1hz || time_changed &#160;&#160;</text>
+</g>
+<!-- ST_RENDER_PIX -->
+<g id="node6" class="node state regular">
+<title>ST_RENDER_PIX</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="160,-228 40,-228 40,-192 160,-192 160,-228"/>
+<text text-anchor="start" x="50.6638" y="-206.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">ST_RENDER_PIX</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M52.3333,-193C52.3333,-193 147.6667,-193 147.6667,-193 153.3333,-193 159,-198.6667 159,-204.3333 159,-204.3333 159,-215.6667 159,-215.6667 159,-221.3333 153.3333,-227 147.6667,-227 147.6667,-227 52.3333,-227 52.3333,-227 46.6667,-227 41,-221.3333 41,-215.6667 41,-215.6667 41,-204.3333 41,-204.3333 41,-198.6667 46.6667,-193 52.3333,-193"/>
+</g>
+<!-- ST_LOAD_SLOT&#45;&gt;ST_RENDER_PIX -->
+<g id="edge5" class="edge transition">
+<title>ST_LOAD_SLOT&#45;&gt;ST_RENDER_PIX</title>
+<path fill="none" stroke="#000000" d="M73.7011,-273.7517C74.4697,-264.8795 76.04,-254.1767 79.221,-245 80.1229,-242.3981 81.2317,-239.7774 82.4636,-237.2038"/>
+<polygon fill="#000000" stroke="#000000" points="85.6488,-238.671 87.3137,-228.2078 79.4872,-235.349 85.6488,-238.671"/>
+<text text-anchor="middle" x="80.3895" y="-248" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- ST_NEXT_SLOT -->
+<g id="node7" class="node state regular">
+<title>ST_NEXT_SLOT</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="272,-134 158,-134 158,-98 272,-98 272,-134"/>
+<text text-anchor="start" x="168.9932" y="-112.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">ST_NEXT_SLOT</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M170.3333,-99C170.3333,-99 259.6667,-99 259.6667,-99 265.3333,-99 271,-104.6667 271,-110.3333 271,-110.3333 271,-121.6667 271,-121.6667 271,-127.3333 265.3333,-133 259.6667,-133 259.6667,-133 170.3333,-133 170.3333,-133 164.6667,-133 159,-127.3333 159,-121.6667 159,-121.6667 159,-110.3333 159,-110.3333 159,-104.6667 164.6667,-99 170.3333,-99"/>
+</g>
+<!-- ST_RENDER_PIX&#45;&gt;ST_NEXT_SLOT -->
+<g id="edge6" class="edge transition">
+<title>ST_RENDER_PIX&#45;&gt;ST_NEXT_SLOT</title>
+<path fill="none" stroke="#000000" d="M136.6859,-191.8952C145.3424,-186.9295 154.2888,-181.1902 162,-175 173.8933,-165.4526 185.4168,-153.1217 194.664,-142.2034"/>
+<polygon fill="#000000" stroke="#000000" points="197.6016,-144.1421 201.26,-134.1989 192.1995,-139.6904 197.6016,-144.1421"/>
+<text text-anchor="start" x="186" y="-166" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">py == slot_h &#45; 1 &#160;&#160;</text>
+<text text-anchor="start" x="186" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">px == slot_w &#45; 1 &#160;&#160;</text>
+</g>
+<!-- ST_NEXT_SLOT&#45;&gt;ST_IDLE -->
+<g id="edge7" class="edge transition">
+<title>ST_NEXT_SLOT&#45;&gt;ST_IDLE</title>
+<path fill="none" stroke="#000000" d="M215,-97.8015C215,-87.3976 215,-74.1215 215,-62.3768"/>
+<polygon fill="#000000" stroke="#000000" points="218.5001,-62.1476 215,-52.1476 211.5001,-62.1476 218.5001,-62.1476"/>
+<text text-anchor="start" x="215" y="-72" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">slot_idx == 3&#39;d7 &#160;&#160;</text>
+</g>
+<!-- ST_NEXT_SLOT&#45;&gt;ST_LOAD_SLOT -->
+<g id="edge8" class="edge transition">
+<title>ST_NEXT_SLOT&#45;&gt;ST_LOAD_SLOT</title>
+<path fill="none" stroke="#000000" d="M254.7031,-134.1931C260.8446,-138.7873 266.3509,-144.3526 270,-151 275.1329,-160.3505 276.1754,-166.3027 270,-175 256.7307,-193.6881 241.6586,-181.4466 221.313,-192 196.9052,-204.6605 195.8953,-216.3273 171,-228 143.9638,-240.6766 130.5225,-227.9618 106,-245 98.4672,-250.2338 92.0866,-257.7759 87.003,-265.2912"/>
+<polygon fill="#000000" stroke="#000000" points="83.9239,-263.6157 81.6397,-273.9613 89.877,-267.2982 83.9239,-263.6157"/>
+<text text-anchor="start" x="221" y="-207" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">not (slot_idx == 3&#39;d7) &#160;&#160;</text>
+</g>
+</g>
+</svg>
+</div></div>
+        <br><br><br><br><br><br>
+    </article class="markdown-body">
+    </body>
+    
